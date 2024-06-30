@@ -1,0 +1,42 @@
+{
+    "summary": "Dedicated and passionate computer science student with a strong foundation in full-stack development, cloud computing, and cybersecurity. Eager to apply theoretical knowledge to real-world projects and contribute to innovative solutions in the tech industry.",
+    "experience": [
+      {
+        "title": "Software Developer Intern",
+        "company": "InnoTech Solutions",
+        "duration": "June 2023 - August 2023",
+        "responsibilities": [
+          "Developed and maintained features for a cloud-based project management tool",
+          "Collaborated with the UX team to implement responsive design improvements",
+          "Participated in code reviews and contributed to the team's coding standards documentation"
+        ]
+      },
+      {
+        "title": "IT Support Volunteer",
+        "company": "Local Community Center",
+        "duration": "January 2022 - Present",
+        "responsibilities": [
+          "Provide technical support and troubleshooting for computer systems and networks",
+          "Conduct basic cybersecurity workshops for community members",
+          "Assist in maintaining and updating the center's website"
+        ]
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "institution": "Tech University",
+        "year": "Expected Graduation: May 2024"
+      }
+    ],
+    "skills": [
+      "Programming Languages: Python, JavaScript, Java, C++",
+      "Web Technologies: React, Node.js, HTML5, CSS3",
+      "Database Management: MySQL, MongoDB",
+      "Cloud Platforms: AWS, Google Cloud Platform",
+      "Version Control: Git, GitHub",
+      "Agile Methodologies",
+      "Problem-solving and analytical thinking"
+    ],
+    "pdfUrl": "/api/resume/pdf"
+  }

@@ -1,0 +1,33 @@
+{
+    "technical": {
+      "languages": ["Python", "JavaScript", "Java", "C++"],
+      "frontend": ["React", "Vue.js", "HTML5", "CSS3", "Tailwind CSS"],
+      "backend": ["Node.js", "Express", "Django", "Flask"],
+      "cloud": ["AWS", "Google Cloud Platform", "Azure"],
+      "cybersecurity": ["Network Security", "Encryption", "Ethical Hacking"],
+      "databases": ["MySQL", "MongoDB", "PostgreSQL"],
+      "devops": ["Docker", "Kubernetes", "Jenkins", "Git"]
+    },
+    "soft": [
+      {
+        "name": "Communication",
+        "description": "Effective in both written and verbal communication, able to explain complex technical concepts to non-technical stakeholders."
+      },
+      {
+        "name": "Problem-Solving",
+        "description": "Strong analytical skills with a methodical approach to troubleshooting and resolving issues."
+      },
+      {
+        "name": "Teamwork",
+        "description": "Collaborative team player, experienced in working with cross-functional teams to deliver projects."
+      },
+      {
+        "name": "Adaptability",
+        "description": "Quick learner, able to adapt to new technologies and methodologies in the ever-evolving tech landscape."
+      },
+      {
+        "name": "Time Management",
+        "description": "Efficient in prioritizing tasks and managing multiple projects simultaneously to meet deadlines."
+      }
+    ]
+  }

@@ -1,0 +1,23 @@
+{
+    "bio": "I'm a passionate computer science student with a keen interest in full-stack development, cloud computing, and cybersecurity. My journey in tech started when I built my first website at the age of 15, and since then, I've been on a constant learning path, exploring new technologies and methodologies.",
+    "education": [
+      {
+        "degree": "Bachelor of Science in Computer Science",
+        "institution": "Tech University",
+        "year": "2020-2024"
+      }
+    ],
+    "experience": [
+      {
+        "title": "Software Developer Intern",
+        "company": "InnoTech Solutions",
+        "duration": "Summer 2023"
+      }
+    ],
+    "interests": {
+      "fullStack": "I enjoy creating end-to-end web applications, from designing intuitive user interfaces to building robust backend systems.",
+      "cloudComputing": "The scalability and flexibility of cloud platforms fascinate me, and I'm always exploring new ways to leverage cloud technologies in my projects.",
+      "cybersecurity": "In an increasingly connected world, I believe that understanding and implementing strong security measures is crucial for any tech professional."
+    },
+    "goals": "My goal is to become a proficient full-stack developer who can create secure, scalable, and user-friendly applications. I aspire to work on projects that have a positive impact on society and continue learning throughout my career."
+  }

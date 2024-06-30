@@ -1,0 +1,60 @@
+{
+    "featured": [
+      {
+        "id": 1,
+        "title": "E-commerce Platform",
+        "description": "A full-stack e-commerce platform with user authentication, product management, and payment integration.",
+        "technologies": ["React", "Node.js", "Express", "MongoDB", "Stripe"],
+        "features": [
+          "User authentication and authorization",
+          "Product catalog with search and filter functionality",
+          "Shopping cart and checkout process",
+          "Payment integration with Stripe",
+          "Order history and tracking"
+        ],
+        "demoUrl": "https://ecommerce-demo.example.com",
+        "githubUrl": "https://github.com/johndoe/ecommerce-platform"
+      },
+      {
+        "id": 2,
+        "title": "Cloud-based Task Manager",
+        "description": "A collaborative task management application leveraging cloud technologies for scalability and real-time updates.",
+        "technologies": ["Vue.js", "Firebase", "Cloud Functions", "Firestore"],
+        "features": [
+          "Real-time task updates across devices",
+          "User collaboration and task sharing",
+          "File attachment and storage using Cloud Storage",
+          "Push notifications for task reminders",
+          "Analytics dashboard for productivity insights"
+        ],
+        "demoUrl": "https://taskmanager-demo.example.com",
+        "githubUrl": "https://github.com/johndoe/cloud-task-manager"
+      }
+    ],
+    "categories": {
+      "Web Development": [
+        {
+          "id": 3,
+          "title": "Personal Blog Platform",
+          "description": "A customizable blog platform with a content management system.",
+          "technologies": ["React", "GraphQL", "Node.js", "PostgreSQL"]
+        }
+      ],
+      "Cloud Computing": [
+        {
+          "id": 4,
+          "title": "Serverless Image Processing Pipeline",
+          "description": "An AWS Lambda-based solution for automated image processing and optimization.",
+          "technologies": ["AWS Lambda", "S3", "DynamoDB", "API Gateway"]
+        }
+      ],
+      "Cybersecurity": [
+        {
+          "id": 5,
+          "title": "Secure File Sharing System",
+          "description": "An end-to-end encrypted file sharing system with access control and audit logging.",
+          "technologies": ["Python", "Flask", "SQLite", "cryptography"]
+        }
+      ]
+    }
+  }
