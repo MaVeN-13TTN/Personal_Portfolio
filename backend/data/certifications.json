@@ -1,26 +1,11 @@
 [
-    {
-      "id": 1,
-      "name": "AWS Certified Cloud Practitioner",
-      "issuer": "Amazon Web Services",
-      "date": "2023-06-01",
-      "expiry": "2026-06-01",
-      "credentialUrl": "https://www.credly.com/badges/aws-certified-cloud-practitioner"
-    },
-    {
-      "id": 2,
-      "name": "Microsoft Certified: Azure Fundamentals",
-      "issuer": "Microsoft",
-      "date": "2023-03-15",
-      "expiry": null,
-      "credentialUrl": "https://www.credly.com/badges/microsoft-certified-azure-fundamentals"
-    },
-    {
-      "id": 3,
-      "name": "CompTIA Security+",
-      "issuer": "CompTIA",
-      "date": "2022-11-30",
-      "expiry": "2025-11-30",
-      "credentialUrl": "https://www.credly.com/badges/comptia-security-ce-certification"
-    }
-  ]
+  {
+    "id": 1,
+    "name": "AWS Certified Cloud Practitioner",
+    "issuer": "Amazon Web Services",
+    "date": "2023-11-19",
+    "expiry": "2026-11-19",
+    "credentialUrl": "https://www.credly.com/badges/ea89d97a-dbde-4b46-a2f7-b43eff13d7b3/public_url",
+    "icon": "FaAws"
+  }
+]

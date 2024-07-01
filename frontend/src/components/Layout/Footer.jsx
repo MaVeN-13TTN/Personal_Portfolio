@@ -1,71 +1,65 @@
 import { Link } from "react-router-dom";
+import { FaLinkedin, FaGithub, FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
+  const getCurrentYear = () => {
+    return new Date().getFullYear();
+  };
+
   return (
-    <footer className="bg-russianViolet text-white py-8">
+    <footer className="bg-russian-violet text-orange-peel py-12">
       <div className="container mx-auto px-4">
-        <div className="flex flex-wrap justify-between">
-          <div className="w-full md:w-1/3 mb-4 md:mb-0">
-            <h3 className="text-xl mb-2">Quick Links</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h3 className="text-2xl font-titan mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li>
-                <Link to="/" className="hover:text-orangePeel">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="hover:text-orangePeel">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link to="/skills" className="hover:text-orangePeel">
-                  Skills
-                </Link>
-              </li>
-              <li>
-                <Link to="/projects" className="hover:text-orangePeel">
-                  Projects
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="hover:text-orangePeel">
-                  Contact
-                </Link>
-              </li>
+              {["Home", "About", "Skills", "Projects", "Contact"].map(
+                (item) => (
+                  <li key={item}>
+                    <Link
+                      to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                      className="font-maven hover:text-princeton-orange transition-smooth"
+                    >
+                      {item}
+                    </Link>
+                  </li>
+                )
+              )}
             </ul>
           </div>
-          <div className="w-full md:w-1/3 mb-4 md:mb-0">
-            <h3 className="text-xl mb-2">Connect</h3>
+          <div>
+            <h3 className="text-2xl font-titan mb-4">Connect</h3>
             <div className="flex space-x-4">
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/ndungu-kinyanjui-581976281/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-orangePeel"
+                className="text-ut-orange hover:text-pumpkin transition-smooth"
               >
-                LinkedIn
+                <FaLinkedin size="2em" />
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/MaVeN-13TTN"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-orangePeel"
+                className="text-ut-orange hover:text-pumpkin transition-smooth"
               >
-                GitHub
+                <FaGithub size="2em" />
               </a>
               <a
-                href="https://twitter.com"
+                href="https://x.com/Maven_TTN?t=J16KvC5RlQVFdoAWmIFEhQ&s=09"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-orangePeel"
+                className="text-ut-orange hover:text-pumpkin transition-smooth"
               >
-                Twitter
+                <FaXTwitter size="2em" />
               </a>
             </div>
           </div>
-          <div className="w-full md:w-1/3">
-            <p>&copy; 2024 Your Name. All rights reserved.</p>
+          <div>
+            <p className="font-maven">
+              &copy; {getCurrentYear()} Ndung'u Kinyanjui. All rights reserved.
+            </p>
           </div>
         </div>
       </div>

@@ -1,42 +1,49 @@
 {
-    "summary": "Dedicated and passionate computer science student with a strong foundation in full-stack development, cloud computing, and cybersecurity. Eager to apply theoretical knowledge to real-world projects and contribute to innovative solutions in the tech industry.",
-    "experience": [
-      {
-        "title": "Software Developer Intern",
-        "company": "InnoTech Solutions",
-        "duration": "June 2023 - August 2023",
-        "responsibilities": [
-          "Developed and maintained features for a cloud-based project management tool",
-          "Collaborated with the UX team to implement responsive design improvements",
-          "Participated in code reviews and contributed to the team's coding standards documentation"
-        ]
-      },
-      {
-        "title": "IT Support Volunteer",
-        "company": "Local Community Center",
-        "duration": "January 2022 - Present",
-        "responsibilities": [
-          "Provide technical support and troubleshooting for computer systems and networks",
-          "Conduct basic cybersecurity workshops for community members",
-          "Assist in maintaining and updating the center's website"
-        ]
-      }
-    ],
-    "education": [
-      {
-        "degree": "Bachelor of Science in Computer Science",
-        "institution": "Tech University",
-        "year": "Expected Graduation: May 2024"
-      }
-    ],
-    "skills": [
-      "Programming Languages: Python, JavaScript, Java, C++",
-      "Web Technologies: React, Node.js, HTML5, CSS3",
-      "Database Management: MySQL, MongoDB",
-      "Cloud Platforms: AWS, Google Cloud Platform",
-      "Version Control: Git, GitHub",
-      "Agile Methodologies",
-      "Problem-solving and analytical thinking"
-    ],
-    "pdfUrl": "/api/resume/pdf"
-  }
+  "name": "Samuel Ndung'u Kinyanjui",
+  "title": "Full-Stack Developer & Cybersecurity Enthusiast",
+  "contact": {
+    "email": "kinyanjuindungu1324@gmail.com",
+    "phone": "+254 728 446 824",
+    "location": "Nairobi, Kenya",
+    "linkedin": "linkedin.com/in/ndungu-kinyanjui-581976281",
+    "github": "github.com/MaVeN-13TTN"
+  },
+  "summary": "As an aspiring security analyst and full-stack developer, I bring a deep passion for protecting organizations and individuals from cyber threats while creating innovative web solutions. My expertise spans incident response, risk management, and security monitoring, combined with strong full-stack development skills. I am adept at performing vulnerability assessments, identifying potential risks, and providing mitigation strategies to safeguard systems and data.",
+  "experience": [
+    {
+      "title": "Student Developer",
+      "company": "DITA",
+      "duration": "2022 - Present",
+      "responsibilities": [
+        "Collaborate on full-stack development projects, enhancing both frontend and backend skills",
+        "Implement security best practices in web application development",
+        "Participate in code reviews and contribute to improving overall code quality"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Science in Applied Computer Science",
+      "institution": "Daystar University",
+      "year": "2022 - 2026"
+    }
+  ],
+  "skills": [
+    "Full-Stack Development: React, Vue.js, Node.js, Express.js",
+    "Programming Languages: JavaScript, Python, Java, C++",
+    "Cloud Computing: AWS, Google Cloud Platform, Azure",
+    "Cybersecurity: Network Security, Application Security, Risk Management",
+    "Database Management: MongoDB, PostgreSQL, MySQL",
+    "DevOps: Docker, Kubernetes, Git, GitHub Actions",
+    "Web Technologies: HTML5, CSS3, RESTful APIs",
+    "Problem-solving and analytical thinking",
+    "Strong written and verbal communication"
+  ],
+  "interests": [
+    "Cloud Computing and Infrastructure",
+    "Cybersecurity and Ethical Hacking",
+    "Artificial Intelligence and Machine Learning",
+    "Blockchain Technology"
+  ],
+  "pdfUrl": "/api/resume/pdf"
+}
