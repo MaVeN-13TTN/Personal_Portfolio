@@ -3,7 +3,8 @@ import { useForm, ValidationError } from "@formspree/react";
 import { motion } from "framer-motion";
 
 const Contact = () => {
-  const [state, handleSubmit] = useForm("mqazkkgl");
+  const formId = import.meta.env.VITE_FORMSPREE_ENDPOINT;
+  const [state, handleSubmit] = useForm(formId);
 
   const containerVariants = {
     hidden: { opacity: 0 },
