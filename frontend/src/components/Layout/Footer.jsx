@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaLinkedin, FaGithub, FaXTwitter } from "react-icons/fa6";
+import { FaLinkedin, FaGithub } from "react-icons/fa6";
 
 const Footer = () => {
   const getCurrentYear = () => {
@@ -45,14 +45,6 @@ const Footer = () => {
                 className="text-ut-orange hover:text-pumpkin transition-smooth"
               >
                 <FaGithub size="2em" />
-              </a>
-              <a
-                href="https://x.com/Maven_TTN?t=J16KvC5RlQVFdoAWmIFEhQ&s=09"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-ut-orange hover:text-pumpkin transition-smooth"
-              >
-                <FaXTwitter size="2em" />
               </a>
             </div>
           </div>
