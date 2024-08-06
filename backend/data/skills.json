@@ -17,6 +17,10 @@
       { "name": "Django", "icon": "SiDjango" },
       { "name": "Flask", "icon": "SiFlask" }
     ],
+  "scripting": [
+      { "name": "Bash", "icon": "FaTerminal" },
+      { "name": "PowerShell", "icon": "FaWindows" }
+],
     "cloud": [
       { "name": "AWS", "icon": "FaAws" },
       { "name": "Azure", "icon": "SiMicrosoftazure" }

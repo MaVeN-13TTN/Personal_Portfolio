@@ -101,6 +101,7 @@ const Skills = () => {
           "Programming",
           "Frontend",
           "Backend",
+          "Scripting",
           "Cloud",
           "Cybersecurity",
           "Databases",
