@@ -37,7 +37,16 @@
           "id": 3,
           "title": "Personal Blog Platform",
           "description": "A customizable blog platform with a content management system.",
-          "technologies": ["React", "GraphQL", "Node.js", "PostgreSQL"]
+          "technologies": ["React", "GraphQL", "Node.js", "PostgreSQL"],
+          "features": [
+            "Rich text editor for blog post creation",
+            "User authentication and role-based access control",
+            "SEO optimization and social media sharing",
+            "Commenting system with moderation",
+            "Custom themes and layout options"
+          ],
+          "demoUrl": "https://blog-demo.example.com",
+          "githubUrl": "https://github.com/johndoe/blog-platform"
         }
       ],
       "Cloud Computing": [
@@ -45,7 +54,16 @@
           "id": 4,
           "title": "Serverless Image Processing Pipeline",
           "description": "An AWS Lambda-based solution for automated image processing and optimization.",
-          "technologies": ["AWS Lambda", "S3", "DynamoDB", "API Gateway"]
+          "technologies": ["AWS Lambda", "S3", "DynamoDB", "API Gateway"],
+          "features": [
+            "Image upload and processing through API calls",
+            "Dynamic image resizing and optimization",
+            "Metadata storage and retrieval using DynamoDB",
+            "Serverless architecture for cost efficiency",
+            "Scalable and fault-tolerant design"
+          ],
+          "demoUrl": "https://image-processing-demo.example.com",
+          "githubUrl": "https://github.com/johndoe/image-processing-pipeline"
         }
       ],
       "Cybersecurity": [
@@ -53,7 +71,17 @@
           "id": 5,
           "title": "Secure File Sharing System",
           "description": "An end-to-end encrypted file sharing system with access control and audit logging.",
-          "technologies": ["Python", "Flask", "SQLite", "cryptography"]
+          "technologies": ["Python", "Flask", "SQLite", "cryptography"],
+          "features": [
+            "User registration and login with 2FA",
+            "File encryption and decryption on the client-side",
+            "Access control through shared links with password protection",
+            "Audit logging for file access and downloads",
+            "Cross-platform compatibility"
+          ],
+          "demoUrl": "https://secure-file-sharing.example.com",
+          "githubUrl": "https://github.com/johndoe/secure-file-sharing"
+
         }
       ]
     }
