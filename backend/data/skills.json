@@ -22,8 +22,7 @@
       { "name": "PowerShell", "icon": "FaWindows" }
 ],
     "cloud": [
-      { "name": "AWS", "icon": "FaAws" },
-      { "name": "Azure", "icon": "SiMicrosoftazure" }
+      { "name": "AWS", "icon": "FaAws" }
     ],
     "cybersecurity": [
       { "name": "Network Security", "icon": "FaShieldAlt" },

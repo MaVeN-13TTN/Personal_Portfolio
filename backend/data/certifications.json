@@ -7,5 +7,14 @@
     "expiry": "2026-11-19",
     "credentialUrl": "https://www.credly.com/badges/ea89d97a-dbde-4b46-a2f7-b43eff13d7b3/public_url",
     "icon": "FaAws"
+  },
+
+  {
+    "id": 2,
+    "name": "Google AI Essentials",
+    "issuer": "Google",
+    "date": "2024-07-22",
+    "credentialUrl": "https://www.coursera.org/account/accomplishments/verify/TU93UVFRQGPB",
+    "icon": "FaGoogle"
   }
 ]
