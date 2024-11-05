@@ -33,9 +33,24 @@ const DynamicIcon = ({ iconName, size = "3em", color = "#ff9e00" }) => {
   return IconComponent ? <IconComponent size={size} color={color} /> : null;
 };
 
+DynamicIcon.propTypes = {
+  iconName: PropTypes.string.isRequired,
+  size: PropTypes.string,
+  color: PropTypes.string,
+};
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat("en-US", {
+    month: "2-digit",
+    day: "2-digit",
+    year: "2-digit",
+  }).format(date);
+};
+
 const CertificationCard = ({ certification }) => (
   <motion.div
-    className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-102 cursor-pointer overflow-hidden"
+    className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-102 cursor-pointer overflow-hidden h-full"
     variants={cardVariants}
     whileHover={{ y: -5 }}
   >
@@ -44,25 +59,33 @@ const CertificationCard = ({ certification }) => (
         <DynamicIcon iconName={certification.icon} />
       </div>
     </div>
-    <div className="p-6">
+    <div className="p-6 flex flex-col h-[calc(100%-112px)]">
+      {" "}
+      {/* 112px is the height of the icon section */}
       <h3 className="text-xl font-bold text-persian-indigo mb-2 text-center font-maven line-clamp-2">
         {certification.name}
       </h3>
       <p className="text-gray-600 mb-2 text-center font-maven">
         {certification.issuer}
       </p>
-      <p className="text-sm text-gray-500 mb-1 text-center font-maven">
-        {certification.date}
-      </p>
-      {certification.expiry && (
-        <p className="text-sm text-gray-500 italic mb-2 text-center font-maven">
-          Expires: {certification.expiry}
-        </p>
-      )}
-      <p className="text-gray-700 text-center font-maven text-sm mt-4 line-clamp-3">
-        This certification validates expertise in{" "}
-        {certification.name.toLowerCase()} technologies and best practices.
-      </p>
+      <div className="text-sm text-gray-500 mb-1 text-center font-maven">
+        <span>Issued: {formatDate(certification.date)}</span>
+        {certification.expiry && (
+          <span className="block italic">
+            Expires: {formatDate(certification.expiry)}
+          </span>
+        )}
+      </div>
+      <div className="mt-4 flex-grow">
+        <h4 className="text-sm font-semibold text-persian-indigo text-center font-maven mb-2">
+          Skills & Proficiency
+        </h4>
+        <div className="relative">
+          <p className="text-gray-700 text-center font-maven text-sm line-clamp-4">
+            {certification.proficiency}
+          </p>
+        </div>
+      </div>
       {certification.credentialUrl && (
         <a
           href={certification.credentialUrl}
@@ -86,6 +109,7 @@ CertificationCard.propTypes = {
     expiry: PropTypes.string,
     credentialUrl: PropTypes.string,
     icon: PropTypes.string.isRequired,
+    proficiency: PropTypes.string.isRequired,
   }).isRequired,
 };
 
