@@ -1,7 +1,11 @@
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { getProjects } from "../utils/api";
+import ProjectCard from "./ProjectCard";
+import ProjectFilters from "./ProjectFilters";
+// Update this import to use the hook from hooks directory
+import { useFilters } from "../hooks/useFilters";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -10,50 +14,6 @@ const containerVariants = {
     transition: { staggerChildren: 0.1 },
   },
 };
-
-const projectVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: { type: "spring", stiffness: 100 },
-  },
-};
-
-const ProjectCard = ({ project }) => (
-  <motion.div
-    className="bg-persian-indigo rounded-lg shadow-lg overflow-hidden"
-    variants={projectVariants}
-    whileHover={{ y: -5, transition: { duration: 0.2 } }}
-  >
-    <div className="p-6">
-      <h3 className="text-xl font-titan text-orange-peel mb-3 leading-tight">
-        {project.title}
-      </h3>
-      <p className="text-gray-300 mb-4 font-maven text-sm leading-relaxed line-clamp-3">
-        {project.description}
-      </p>
-      <div className="flex flex-wrap gap-2 mb-4">
-        {project.technologies.map((tech, index) => (
-          <span
-            key={index}
-            className="bg-russian-violet text-orange-peel px-2 py-1 rounded-full text-xs font-maven"
-          >
-            {tech}
-          </span>
-        ))}
-      </div>
-      <div className="flex justify-end">
-        <Link
-          to={`/projects/${project.id}`}
-          className="text-princeton-orange hover:text-orange-peel transition-colors duration-300 font-maven text-sm font-semibold"
-        >
-          View Details
-        </Link>
-      </div>
-    </div>
-  </motion.div>
-);
 
 const Projects = () => {
   const {
@@ -65,58 +25,118 @@ const Projects = () => {
     queryFn: getProjects,
   });
 
-  if (isLoading)
+  const { filters } = useFilters();
+
+  // Filter projects based on current filters
+  const filteredProjects = useMemo(() => {
+    if (!projectsData) return [];
+
+    // Combine all projects
+    let projects = [
+      ...projectsData.featured,
+      ...Object.values(projectsData.categories).flat(),
+    ];
+
+    // Apply filters
+    return projects.filter((project) => {
+      // Project Type Filter
+      if (filters.projectType && project.team.type !== filters.projectType) {
+        return false;
+      }
+
+      // Technologies Filter
+      if (
+        filters.technologies.length > 0 &&
+        !filters.technologies.some((tech) =>
+          project.technologies.includes(tech)
+        )
+      ) {
+        return false;
+      }
+
+      // Status Filter
+      if (filters.status && project.status !== filters.status) {
+        return false;
+      }
+
+      // Difficulty Filter
+      if (filters.difficulty && project.difficulty !== filters.difficulty) {
+        return false;
+      }
+
+      // Search Query
+      if (filters.searchQuery) {
+        const search = filters.searchQuery.toLowerCase();
+        return (
+          project.title.toLowerCase().includes(search) ||
+          project.description.toLowerCase().includes(search) ||
+          project.technologies.some((tech) =>
+            tech.toLowerCase().includes(search)
+          )
+        );
+      }
+
+      return true;
+    });
+  }, [projectsData, filters]);
+
+  if (isLoading) {
     return (
       <div className="text-center text-orange-peel font-maven text-lg">
         Loading...
       </div>
     );
-  if (error)
+  }
+
+  if (error) {
     return (
       <div className="text-center text-pumpkin font-maven text-lg">
         An error occurred: {error.message}
       </div>
     );
+  }
 
   return (
-    <motion.div
-      className="container mx-auto px-4 py-16"
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      <h1 className="text-4xl md:text-5xl font-titan text-princeton-orange mb-16 text-center leading-tight">
+    <div className="container mx-auto px-4 py-16">
+      <h1
+        className="text-4xl md:text-5xl font-titan text-princeton-orange 
+                   mb-16 text-center leading-tight"
+      >
         My Projects
       </h1>
 
-      <motion.section className="mb-20" variants={projectVariants}>
-        <h2 className="text-2xl md:text-3xl font-titan text-orange-peel mb-8 leading-tight">
-          Featured Projects
-        </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projectsData.featured.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
-      </motion.section>
+      <ProjectFilters projects={projectsData} />
 
-      {Object.entries(projectsData.categories).map(([category, projects]) => (
-        <motion.section
-          key={category}
-          className="mb-20"
-          variants={projectVariants}
-        >
-          <h2 className="text-2xl md:text-3xl font-titan text-orange-peel mb-8 leading-tight">
-            {category}
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
+      <AnimatePresence mode="wait">
+        {filteredProjects.length > 0 ? (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={containerVariants}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {filteredProjects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
-          </div>
-        </motion.section>
-      ))}
-    </motion.div>
+          </motion.div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="text-center py-12"
+          >
+            <h3 className="text-2xl font-titan text-orange-peel mb-4">
+              No Projects Found
+            </h3>
+            <p className="text-gray-300 font-maven">
+              Try adjusting your filters to see more projects.
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 

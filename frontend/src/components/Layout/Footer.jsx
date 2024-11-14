@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaLinkedin, FaGithub } from "react-icons/fa6";
+import { FaLinkedin, FaGithub, FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   const getCurrentYear = () => {
@@ -31,7 +31,7 @@ const Footer = () => {
             <h3 className="text-2xl font-titan mb-4">Connect</h3>
             <div className="flex space-x-4">
               <a
-                href="https://www.linkedin.com/in/ndungu-kinyanjui-581976281/"
+                href="https://www.linkedin.com/in/ndungu-kinyanjui/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-ut-orange hover:text-pumpkin transition-smooth"
@@ -46,11 +46,20 @@ const Footer = () => {
               >
                 <FaGithub size="2em" />
               </a>
+              <a
+                href="https://x.com/Maven_TTN"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-ut-orange hover:text-pumpkin transition-smooth"
+              >
+                <FaXTwitter size="2em" />
+              </a>
             </div>
           </div>
           <div>
             <p className="font-maven">
-              &copy; {getCurrentYear()} Ndung'u Kinyanjui. All rights reserved.
+              &copy; {getCurrentYear()} Ndung&apos;u Kinyanjui. All rights
+              reserved.
             </p>
           </div>
         </div>

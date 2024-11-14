@@ -10,7 +10,7 @@ const Header = () => {
     <header className="bg-russian-violet text-orange-peel py-6">
       <nav className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
         <Link to="/" className="text-3xl font-titan mb-4 md:mb-0">
-          Ndung'u Kinyanjui
+          Ndung&apos;u Kinyanjui
         </Link>
         <ul className="flex flex-wrap justify-center space-x-6">
           {[

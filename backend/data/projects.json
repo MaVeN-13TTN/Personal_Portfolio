@@ -1,88 +1,206 @@
 {
-    "featured": [
-      {
-        "id": 1,
-        "title": "E-commerce Platform",
-        "description": "A full-stack e-commerce platform with user authentication, product management, and payment integration.",
-        "technologies": ["React", "Node.js", "Express", "MongoDB", "Stripe"],
-        "features": [
-          "User authentication and authorization",
-          "Product catalog with search and filter functionality",
-          "Shopping cart and checkout process",
-          "Payment integration with Stripe",
-          "Order history and tracking"
-        ],
-        "demoUrl": "https://ecommerce-demo.example.com",
-        "githubUrl": "https://github.com/johndoe/ecommerce-platform"
+  "featured": [
+    {
+      "id": 1,
+      "title": "Personal Portfolio Website",
+      "description": "A modern portfolio website built with React, Tailwind CSS, and Flask. Features dynamic content management, dark mode, and responsive design. This project showcases my frontend and backend development skills while providing a platform to display my work.",
+      "previewImage": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97",
+      "technologies": ["React", "Tailwind CSS", "Flask", "Python", "Framer Motion"],
+      "features": [
+        "Responsive design with Tailwind CSS",
+        "Dark/light mode toggle",
+        "Dynamic project showcase",
+        "Blog integration with Medium",
+        "Contact form with email integration",
+        "Custom animations using Framer Motion"
+      ],
+      "status": "Completed",
+      "difficulty": "Intermediate",
+      "timeline": {
+        "startDate": "2023-10-01",
+        "endDate": "2023-11-15"
       },
+      "team": {
+        "size": 1,
+        "type": "solo",
+        "contributors": [
+          {
+            "name": "Ndung'u Kinyanjui",
+            "role": "Full Stack Developer",
+            "github": "https://github.com/MaVeN-13TTN",
+            "isOwner": true
+          }
+        ]
+      },
+      "roles": [
+        "Frontend Development",
+        "Backend Development",
+        "UI/UX Design",
+        "Content Management",
+        "DevOps"
+      ],
+      "learningOutcomes": [
+        "Mastered Tailwind CSS and responsive design principles",
+        "Implemented dark mode with dynamic theme switching",
+        "Built a Flask REST API with proper architecture",
+        "Integrated Framer Motion for smooth animations",
+        "Implemented SEO best practices"
+      ],
+      "completion": 100,
+      "demoUrl": "https://your-portfolio.com",
+      "githubUrl": "https://github.com/MaVeN-13TTN/portfolio",
+      "personalProject": true
+    },
+    {
+      "id": 2,
+      "title": "AI-Powered Code Review Assistant",
+      "description": "An AI-powered tool that helps automate code reviews by analyzing code quality, identifying potential issues, and suggesting improvements. Built as part of a team project focusing on improving developer productivity.",
+      "previewImage": "https://images.unsplash.com/photo-1516116216624-53e697fedbea",
+      "technologies": ["Python", "TensorFlow", "FastAPI", "React", "Docker", "PostgreSQL"],
+      "features": [
+        "Automated code quality analysis",
+        "Security vulnerability detection",
+        "Performance optimization suggestions",
+        "Code style enforcement",
+        "Integration with GitHub",
+        "Real-time feedback system"
+      ],
+      "status": "In Progress",
+      "difficulty": "Advanced",
+      "timeline": {
+        "startDate": "2023-10-15",
+        "endDate": null
+      },
+      "team": {
+        "size": 3,
+        "type": "team",
+        "contributors": [
+          {
+            "name": "Ndung'u Kinyanjui",
+            "role": "Machine Learning Engineer",
+            "github": "https://github.com/MaVeN-13TTN"
+          },
+          {
+            "name": "David Lee",
+            "role": "Backend Developer",
+            "github": "https://github.com/davidlee"
+          },
+          {
+            "name": "Emma Davis",
+            "role": "Frontend Developer",
+            "github": "https://github.com/emmadavis"
+          }
+        ]
+      },
+      "completion": 60,
+      "demoUrl": null,
+      "githubUrl": "https://github.com/team/ai-code-review"
+    }
+  ],
+  "categories": {
+    "Personal Projects": [
       {
-        "id": 2,
-        "title": "Cloud-based Task Manager",
-        "description": "A collaborative task management application leveraging cloud technologies for scalability and real-time updates.",
-        "technologies": ["Vue.js", "Firebase", "Cloud Functions", "Firestore"],
+        "id": 3,
+        "title": "Weather Dashboard",
+        "description": "A weather dashboard application built to practice API integration and data visualization. Features real-time weather updates, interactive maps, and detailed forecasts.",
+        "previewImage": "https://images.unsplash.com/photo-1532178910-7815d6919875",
+        "technologies": ["React", "OpenWeather API", "Chart.js", "Tailwind CSS", "Leaflet.js"],
         "features": [
-          "Real-time task updates across devices",
-          "User collaboration and task sharing",
-          "File attachment and storage using Cloud Storage",
-          "Push notifications for task reminders",
-          "Analytics dashboard for productivity insights"
+          "Real-time weather data updates",
+          "5-day weather forecast",
+          "Interactive weather maps",
+          "Location-based weather tracking",
+          "Weather alerts and notifications",
+          "Responsive design for all devices"
         ],
-        "demoUrl": "https://taskmanager-demo.example.com",
-        "githubUrl": "https://github.com/johndoe/cloud-task-manager"
+        "status": "Completed",
+        "difficulty": "Intermediate",
+        "timeline": {
+          "startDate": "2023-11-01",
+          "endDate": "2023-11-30"
+        },
+        "team": {
+          "size": 1,
+          "type": "solo",
+          "contributors": [
+            {
+              "name": "Ndung'u Kinyanjui",
+              "role": "Developer",
+              "github": "https://github.com/MaVeN-13TTN",
+              "isOwner": true
+            }
+          ]
+        },
+        "roles": [
+          "Frontend Development",
+          "API Integration",
+          "Data Visualization",
+          "UI/UX Design"
+        ],
+        "learningOutcomes": [
+          "Implemented complex API integrations",
+          "Created interactive data visualizations",
+          "Managed real-time data updates",
+          "Handled geolocation services",
+          "Optimized performance for mobile devices"
+        ],
+        "completion": 100,
+        "demoUrl": "https://weather-dash.example.com",
+        "githubUrl": "https://github.com/MaVeN-13TTN/weather-dashboard",
+        "personalProject": true
       }
     ],
-    "categories": {
-      "Web Development": [
-        {
-          "id": 3,
-          "title": "Personal Blog Platform",
-          "description": "A customizable blog platform with a content management system.",
-          "technologies": ["React", "GraphQL", "Node.js", "PostgreSQL"],
-          "features": [
-            "Rich text editor for blog post creation",
-            "User authentication and role-based access control",
-            "SEO optimization and social media sharing",
-            "Commenting system with moderation",
-            "Custom themes and layout options"
-          ],
-          "demoUrl": "https://blog-demo.example.com",
-          "githubUrl": "https://github.com/johndoe/blog-platform"
-        }
-      ],
-      "Cloud Computing": [
-        {
-          "id": 4,
-          "title": "Serverless Image Processing Pipeline",
-          "description": "An AWS Lambda-based solution for automated image processing and optimization.",
-          "technologies": ["AWS Lambda", "S3", "DynamoDB", "API Gateway"],
-          "features": [
-            "Image upload and processing through API calls",
-            "Dynamic image resizing and optimization",
-            "Metadata storage and retrieval using DynamoDB",
-            "Serverless architecture for cost efficiency",
-            "Scalable and fault-tolerant design"
-          ],
-          "demoUrl": "https://image-processing-demo.example.com",
-          "githubUrl": "https://github.com/johndoe/image-processing-pipeline"
-        }
-      ],
-      "Cybersecurity": [
-        {
-          "id": 5,
-          "title": "Secure File Sharing System",
-          "description": "An end-to-end encrypted file sharing system with access control and audit logging.",
-          "technologies": ["Python", "Flask", "SQLite", "cryptography"],
-          "features": [
-            "User registration and login with 2FA",
-            "File encryption and decryption on the client-side",
-            "Access control through shared links with password protection",
-            "Audit logging for file access and downloads",
-            "Cross-platform compatibility"
-          ],
-          "demoUrl": "https://secure-file-sharing.example.com",
-          "githubUrl": "https://github.com/johndoe/secure-file-sharing"
-
-        }
-      ]
-    }
+    "Team Projects": [
+      {
+        "id": 4,
+        "title": "Task Management System",
+        "description": "A collaborative project management tool with real-time updates, team collaboration features, and performance analytics. Designed for remote teams to streamline their workflow.",
+        "previewImage": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
+        "technologies": ["Vue.js", "Firebase", "Node.js", "Express", "Socket.io", "MongoDB"],
+        "features": [
+          "Real-time task updates and notifications",
+          "Team collaboration tools",
+          "Project timeline visualization",
+          "Resource allocation tracking",
+          "Performance analytics dashboard",
+          "Integration with popular tools"
+        ],
+        "status": "In Progress",
+        "difficulty": "Advanced",
+        "timeline": {
+          "startDate": "2023-09-01",
+          "endDate": null
+        },
+        "team": {
+          "size": 4,
+          "type": "team",
+          "contributors": [
+            {
+              "name": "Ndung'u Kinyanjui",
+              "role": "Frontend Developer",
+              "github": "https://github.com/MaVeN-13TTN"
+            },
+            {
+              "name": "Alex Thompson",
+              "role": "Backend Developer",
+              "github": "https://github.com/alexthompson"
+            },
+            {
+              "name": "Lisa Wang",
+              "role": "UI/UX Designer",
+              "github": "https://github.com/lisawang"
+            },
+            {
+              "name": "James Wilson",
+              "role": "DevOps Engineer",
+              "github": "https://github.com/jameswilson"
+            }
+          ]
+        },
+        "completion": 75,
+        "demoUrl": "https://task-management.example.com",
+        "githubUrl": "https://github.com/team/task-management"
+      }
+    ]
   }
+}
