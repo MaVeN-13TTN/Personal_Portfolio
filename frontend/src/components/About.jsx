@@ -93,7 +93,7 @@ const About = () => {
         variants={sectionVariants}
       >
         <h2 className="text-3xl font-titan text-princeton-orange mb-6 border-b-2 border-orange-peel pb-2 flex items-center">
-          <FaLightbulb className="mr-2" /> Interests in Computer Science
+          <FaLightbulb className="mr-2" /> Interests
         </h2>
         <div className="grid md:grid-cols-3 gap-6">
           {[
