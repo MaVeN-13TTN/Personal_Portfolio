@@ -6,8 +6,22 @@
     "date": "2024-11-01",
     "expiry": "2027-11-01",
     "credentialUrl": "https://www.credly.com/badges/fe753d77-02f0-4fb6-8dfe-80e1fb44f3ab/public_url",
-    "icon": "FaAws",
-    "proficiency": "Advanced expertise in designing distributed systems, implementing security controls, defining networking architecture, and deploying scalable AWS solutions aligned with business requirements"
+    "badgeUrl": "https://images.credly.com/size/340x340/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png",
+    "description": "Advanced expertise in designing distributed systems, implementing security controls, defining networking architecture, and deploying scalable AWS solutions aligned with business requirements",
+    "skills": [
+      "AWS",
+      "Cloud Architecture",
+      "Security",
+      "Distributed Systems",
+      "Networking",
+      "Scalability"
+    ],
+    "earningCriteria": [
+      "Successfully passed the AWS Solutions Architect - Associate exam",
+      "Demonstrated proficiency in designing distributed systems on AWS",
+      "Validated expertise in AWS security and networking"
+    ],
+    "level": "Intermediate"
   },
   {
     "id": 1,
@@ -16,8 +30,21 @@
     "date": "2023-11-19",
     "expiry": "2026-11-19",
     "credentialUrl": "https://www.credly.com/badges/ea89d97a-dbde-4b46-a2f7-b43eff13d7b3/public_url",
-    "icon": "FaAws",
-    "proficiency": "Fundamental understanding of AWS Cloud concepts, services, security best practices, architecture principles, pricing models, and support operations"
+    "badgeUrl": "https://images.credly.com/size/340x340/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png",
+    "description": "Fundamental understanding of AWS Cloud concepts, services, security best practices, architecture principles, pricing models, and support operations",
+    "skills": [
+      "AWS",
+      "Cloud Computing",
+      "Security Best Practices",
+      "Cloud Architecture",
+      "Cost Management",
+      "Support Operations"
+    ],
+    "earningCriteria": [
+      "Successfully passed the AWS Certified Cloud Practitioner exam",
+      "Demonstrated understanding of AWS Cloud concepts and services"
+    ],
+    "level": "Foundational"
   },
   {
     "id": 2,
@@ -25,7 +52,20 @@
     "issuer": "Google",
     "date": "2024-07-22",
     "credentialUrl": "https://www.coursera.org/account/accomplishments/verify/TU93UVFRQGPB",
-    "icon": "FaGoogle",
-    "proficiency": "Proficient in leveraging generative AI tools, LLMs, and prompt engineering for content development and task optimization. Skilled in responsible AI practices, bias identification, and staying current with AI advancements"
+    "badgeUrl": "https://images.credly.com/size/340x340/images/ea3eec65-ddad-4242-9c59-1defac0fa2d9/image.png",
+    "description": "Proficient in leveraging generative AI tools, LLMs, and prompt engineering for content development and task optimization. Skilled in responsible AI practices, bias identification, and staying current with AI advancements",
+    "skills": [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "LLMs",
+      "Prompt Engineering",
+      "AI Ethics",
+      "Bias Detection"
+    ],
+    "earningCriteria": [
+      "Successfully completed the Google AI Essentials certification",
+      "Demonstrated proficiency in AI tools and practices"
+    ],
+    "level": "Intermediate"
   }
 ]
