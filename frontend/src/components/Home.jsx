@@ -98,7 +98,7 @@ const Home = () => {
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-maven text-ut-orange mb-4">
                   {heroData?.title}
                 </h2>
-                <p className="text-lg sm:text-xl font-maven text-orange-peel mb-8">
+                <p className="text-lg sm:text-xl font-maven text-white mb-8">
                   {heroData?.tagline}
                 </p>
                 <Link

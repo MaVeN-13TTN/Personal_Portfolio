@@ -6,7 +6,14 @@ const Footer = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const getCurrentYear = () => new Date().getFullYear();
 
-  const quickLinks = ["Home", "About", "Skills", "Projects", "Contact"];
+  const quickLinks = [
+    "Home",
+    "About",
+    "Skills",
+    "Projects",
+    "Certifications",
+    "Contact",
+  ];
 
   return (
     <footer className="bg-russian-violet text-orange-peel py-12">

@@ -7,7 +7,7 @@ const CertificateHolder = ({ certification }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   // Skip rendering if the URL contains placeholder text
-  if (certification.imageUrl.includes("MAVEN_ID")) {
+  if (certification.imageUrl.includes("T1TAN_ID")) {
     return null;
   }
 
@@ -36,9 +36,9 @@ const CertificateHolder = ({ certification }) => {
       </div>
 
       <div className="p-4 bg-gradient-to-r from-persian-indigo to-russian-violet">
-        <h3 className="text-lg font-maven-bold text-white mb-1">
+        <h4 className="text-xl font-bold text-white mb-1 font-maven">
           {certification.name}
-        </h3>
+        </h4>
         <p className="text-sm text-gray-200">{certification.issuer}</p>
       </div>
     </motion.div>

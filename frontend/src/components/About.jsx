@@ -97,9 +97,9 @@ const About = () => {
         </h2>
         <div className="grid md:grid-cols-3 gap-6">
           {[
-            { key: "fullStack", title: "Full Stack", icon: "🌐" },
             { key: "cloudComputing", title: "Cloud Computing", icon: "☁️" },
             { key: "cybersecurity", title: "Cybersecurity", icon: "🔒" },
+            { key: "fullStack", title: "Full Stack", icon: "🌐" },
           ].map((interest, index) => (
             <div
               key={index}
