@@ -1,20 +1,46 @@
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import CertificationBadge from "./CertificationBadge";
 import SkillTag from "../shared/SkillTag";
 
 const CertificationDetail = ({ certification, onClose }) => {
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+
+    const handleClickOutside = (e) => {
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [onClose]);
+
   return (
     <div className="fixed inset-0 bg-persian-indigo/50 flex items-center justify-center z-50 p-4">
       <motion.div
+        ref={modalRef}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 20 }}
         className="bg-white rounded-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto relative shadow-xl"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="certification-title"
       >
         <div className="grid grid-cols-1 md:grid-cols-[340px_1fr] gap-8">
-          {/* Left Column - Badge */}
-          <div className="bg-gradient-to-b from-persian-indigo to-russian-violet p-8 flex justify-center items-start rounded-l-lg">
+          <div className="bg-gradient-to-b from-persian-indigo to-russian-violet p-8 flex justify-center items-start rounded-t-lg md:rounded-l-lg md:rounded-tr-none">
             <div className="w-64 h-64">
               <CertificationBadge
                 badgeUrl={certification.badgeUrl}
@@ -23,9 +49,11 @@ const CertificationDetail = ({ certification, onClose }) => {
             </div>
           </div>
 
-          {/* Right Column - Content */}
           <div className="p-8 pr-12">
-            <h2 className="text-[28px] font-bold text-persian-indigo mb-2 font-maven">
+            <h2
+              id="certification-title"
+              className="text-[28px] font-bold text-persian-indigo mb-2 font-maven"
+            >
               {certification.name}
             </h2>
 
@@ -38,13 +66,14 @@ const CertificationDetail = ({ certification, onClose }) => {
               {certification.description}
             </p>
 
-            <div className="flex items-center gap-2 mb-6">
+            <div className="flex flex-wrap items-center gap-2 mb-6">
               <div className="inline-flex items-center px-3 py-1.5 bg-persian-indigo/10 rounded-md">
                 <svg
                   className="w-4 h-4 mr-2 text-persian-indigo"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
+                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"
@@ -63,6 +92,7 @@ const CertificationDetail = ({ certification, onClose }) => {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
+                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"
@@ -77,7 +107,6 @@ const CertificationDetail = ({ certification, onClose }) => {
               </div>
             </div>
 
-            {/* Skills Section */}
             <div className="mb-8">
               <h3 className="text-lg font-semibold mb-4 text-persian-indigo font-maven">
                 Skills
@@ -89,7 +118,6 @@ const CertificationDetail = ({ certification, onClose }) => {
               </div>
             </div>
 
-            {/* Earning Criteria */}
             <div>
               <h3 className="text-lg font-semibold mb-4 text-persian-indigo font-maven">
                 Earning Criteria
@@ -100,6 +128,7 @@ const CertificationDetail = ({ certification, onClose }) => {
                     className="w-5 h-5 text-orange-peel mt-0.5 flex-shrink-0"
                     viewBox="0 0 20 20"
                     fill="currentColor"
+                    aria-hidden="true"
                   >
                     <path
                       fillRule="evenodd"
@@ -116,7 +145,6 @@ const CertificationDetail = ({ certification, onClose }) => {
           </div>
         </div>
 
-        {/* Close Button */}
         <button
           onClick={onClose}
           className="absolute top-4 right-4 p-2 hover:bg-persian-indigo/10 rounded-full transition-colors duration-200 group"
@@ -127,6 +155,7 @@ const CertificationDetail = ({ certification, onClose }) => {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
