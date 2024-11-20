@@ -1,17 +1,28 @@
-import { useState } from "react";
+import { useMemo } from "react";
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
 import { getDirectImageUrl } from "../../utils/imageUtils";
+import Certificate from "./Certificate";
 
 const CertificateHolder = ({ certification }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const isValidCertification = useMemo(
+    () => !certification.imageUrl.includes("T1TAN_ID"),
+    [certification.imageUrl]
+  );
 
-  // Skip rendering if the URL contains placeholder text
-  if (certification.imageUrl.includes("T1TAN_ID")) {
+  const directUrl = useMemo(() => {
+    if (!isValidCertification) return null;
+    try {
+      return getDirectImageUrl(certification.imageUrl);
+    } catch (error) {
+      console.error("Error processing image URL:", error);
+      return null;
+    }
+  }, [certification.imageUrl, isValidCertification]);
+
+  if (!isValidCertification || !directUrl) {
     return null;
   }
-
-  const directUrl = getDirectImageUrl(certification.imageUrl);
 
   return (
     <motion.div
@@ -19,27 +30,22 @@ const CertificateHolder = ({ certification }) => {
       whileHover={{ y: -5 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="aspect-video relative bg-gray-100">
-        {isLoading && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-persian-indigo"></div>
-          </div>
-        )}
-
-        <iframe
-          src={directUrl}
-          className="w-full h-full border-none"
-          onLoad={() => setIsLoading(false)}
-          title={certification.name}
-          allow="autoplay"
-        />
-      </div>
+      <Certificate
+        certification={certification}
+        directUrl={directUrl}
+        verificationUrl={certification.verificationUrl}
+      />
 
       <div className="p-4 bg-gradient-to-r from-persian-indigo to-russian-violet">
         <h4 className="text-xl font-bold text-white mb-1 font-maven">
           {certification.name}
         </h4>
         <p className="text-sm text-gray-200">{certification.issuer}</p>
+        {certification.description && (
+          <p className="text-sm text-gray-300 mt-2">
+            {certification.description}
+          </p>
+        )}
       </div>
     </motion.div>
   );
@@ -50,6 +56,7 @@ CertificateHolder.propTypes = {
     name: PropTypes.string.isRequired,
     issuer: PropTypes.string.isRequired,
     imageUrl: PropTypes.string.isRequired,
+    verificationUrl: PropTypes.string,
     description: PropTypes.string,
     skills: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
