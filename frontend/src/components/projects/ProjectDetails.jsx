@@ -15,7 +15,7 @@ import {
   FaGraduationCap,
   FaTools,
 } from "react-icons/fa";
-import { getProjectDetails } from "../utils/api";
+import { getProjectDetails } from "../../utils/api";
 
 const containerVariants = {
   hidden: { opacity: 0 },

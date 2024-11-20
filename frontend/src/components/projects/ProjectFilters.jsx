@@ -2,9 +2,8 @@ import { useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaSearch, FaTimes, FaChevronDown, FaChevronUp } from "react-icons/fa";
-import { useFilters } from "../hooks/useFilters";
-
-// Active Filter Badge Component
+import { useFilters } from "../../hooks/useFilters";
+import TechSelect from "./TechSelect";
 
 const ActiveFilterBadge = ({ label, value, onRemove }) => (
   <span className="inline-flex items-center gap-1 bg-persian-indigo px-2 py-1 rounded-full text-xs">
@@ -19,6 +18,7 @@ const ActiveFilterBadge = ({ label, value, onRemove }) => (
     </button>
   </span>
 );
+
 ActiveFilterBadge.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
@@ -54,10 +54,10 @@ const ProjectFilters = ({ projects, isLoading = false }) => {
     };
   }, [projects]);
 
-  // Get active filters count
   const activeFiltersCount = Object.entries(contextFilters).reduce(
     (count, [key, value]) => {
       if (value && key !== "searchQuery") {
+        if (Array.isArray(value) && value.length === 0) return count;
         return count + 1;
       }
       return count;
@@ -69,6 +69,8 @@ const ProjectFilters = ({ projects, isLoading = false }) => {
     <div
       className="absolute inset-0 bg-russian-violet/50 backdrop-blur-sm 
                     rounded-lg flex items-center justify-center z-10"
+      aria-live="polite"
+      aria-busy={true}
     >
       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-peel"></div>
     </div>
@@ -82,7 +84,6 @@ const ProjectFilters = ({ projects, isLoading = false }) => {
     >
       {isLoading && <LoadingOverlay />}
 
-      {/* Mobile Toggle Header */}
       <div className="flex sm:hidden items-center justify-between w-full mb-4">
         <h2 className="text-xl font-titan text-orange-peel">
           Filters {activeFiltersCount > 0 && `(${activeFiltersCount})`}
@@ -96,7 +97,6 @@ const ProjectFilters = ({ projects, isLoading = false }) => {
         </button>
       </div>
 
-      {/* Desktop Header */}
       <div className="hidden sm:flex justify-between items-center mb-4">
         <h2 className="text-2xl font-titan text-orange-peel">
           Filter Projects
@@ -106,25 +106,31 @@ const ProjectFilters = ({ projects, isLoading = false }) => {
         ) && (
           <button
             onClick={clearFilters}
-            className="text-princeton-orange hover:text-orange-peel 
-                     transition-colors flex items-center gap-2"
+            className="text-princeton-orange hover:text-orange-peel transition-colors flex items-center gap-2"
+            aria-label="Clear all filters"
           >
             <FaTimes /> Clear All
           </button>
         )}
       </div>
 
-      {/* Active Filters Display */}
       {activeFiltersCount > 0 && (
         <div className="flex flex-wrap gap-2 mb-4">
           {Object.entries(contextFilters).map(([key, value]) => {
             if (value && key !== "searchQuery") {
+              // Skip empty arrays for technologies
+              if (Array.isArray(value) && value.length === 0) return null;
+              const displayValue = Array.isArray(value)
+                ? value.join(", ")
+                : value;
               return (
                 <ActiveFilterBadge
                   key={key}
                   label={key.charAt(0).toUpperCase() + key.slice(1)}
-                  value={value}
-                  onRemove={() => updateFilter(key, "")}
+                  value={displayValue}
+                  onRemove={() =>
+                    updateFilter(key, Array.isArray(value) ? [] : "")
+                  }
                 />
               );
             }
@@ -133,7 +139,6 @@ const ProjectFilters = ({ projects, isLoading = false }) => {
         </div>
       )}
 
-      {/* Collapsible Content */}
       <AnimatePresence>
         {(isExpanded || window.innerWidth >= 640) && (
           <motion.div
@@ -142,25 +147,25 @@ const ProjectFilters = ({ projects, isLoading = false }) => {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            {/* Filters Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-              {/* Project Type Filter */}
               <div className="flex flex-col gap-1 w-full">
-                <label className="text-orange-peel text-xs sm:text-sm font-maven">
+                <label
+                  htmlFor="projectType"
+                  className="text-orange-peel text-xs sm:text-sm font-maven"
+                >
                   Project Type
                 </label>
                 <select
-                  value={contextFilters.projectType}
+                  id="projectType"
+                  value={contextFilters.projectType || ""}
                   onChange={(e) => updateFilter("projectType", e.target.value)}
                   className={`bg-persian-indigo text-gray-300 rounded-lg px-3 py-2 h-10
-                           border focus:outline-none focus:ring-2 
-                           focus:ring-princeton-orange w-full text-sm sm:text-base
+                           border focus:outline-none focus:ring-2 focus:ring-princeton-orange w-full text-sm sm:text-base
                            ${
                              contextFilters.projectType
                                ? "border-orange-peel"
                                : "border-gray-600"
                            }`}
-                  aria-label="Filter by project type"
                   disabled={isLoading}
                 >
                   <option value="">All Project Types</option>
@@ -172,57 +177,36 @@ const ProjectFilters = ({ projects, isLoading = false }) => {
                 </select>
               </div>
 
-              {/* Technologies Filter */}
               <div className="flex flex-col gap-1 w-full">
                 <label className="text-orange-peel text-xs sm:text-sm font-maven">
                   Technologies
                 </label>
-                <select
-                  value={contextFilters.technologies}
-                  onChange={(e) => {
-                    const values = Array.from(
-                      e.target.selectedOptions,
-                      (option) => option.value
-                    );
-                    updateFilter("technologies", values);
-                  }}
-                  className={`bg-persian-indigo text-gray-300 rounded-lg px-3 py-2 h-10
-                           border focus:outline-none focus:ring-2 
-                           focus:ring-princeton-orange w-full text-sm sm:text-base
-                           ${
-                             contextFilters.technologies
-                               ? "border-orange-peel"
-                               : "border-gray-600"
-                           }`}
-                  aria-label="Filter by technologies"
+                <TechSelect
+                  options={filterOptions.technologies}
+                  value={contextFilters.technologies || []}
+                  onChange={(values) => updateFilter("technologies", values)}
                   disabled={isLoading}
-                >
-                  <option value="">All Technologies</option>
-                  {filterOptions.technologies.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
+                />
               </div>
 
-              {/* Status Filter */}
               <div className="flex flex-col gap-1 w-full">
-                <label className="text-orange-peel text-xs sm:text-sm font-maven">
+                <label
+                  htmlFor="status"
+                  className="text-orange-peel text-xs sm:text-sm font-maven"
+                >
                   Status
                 </label>
                 <select
-                  value={contextFilters.status}
+                  id="status"
+                  value={contextFilters.status || ""}
                   onChange={(e) => updateFilter("status", e.target.value)}
                   className={`bg-persian-indigo text-gray-300 rounded-lg px-3 py-2 h-10
-                           border focus:outline-none focus:ring-2 
-                           focus:ring-princeton-orange w-full text-sm sm:text-base
+                           border focus:outline-none focus:ring-2 focus:ring-princeton-orange w-full text-sm sm:text-base
                            ${
                              contextFilters.status
                                ? "border-orange-peel"
                                : "border-gray-600"
                            }`}
-                  aria-label="Filter by status"
                   disabled={isLoading}
                 >
                   <option value="">All Status</option>
@@ -234,23 +218,24 @@ const ProjectFilters = ({ projects, isLoading = false }) => {
                 </select>
               </div>
 
-              {/* Difficulty Filter */}
               <div className="flex flex-col gap-1 w-full">
-                <label className="text-orange-peel text-xs sm:text-sm font-maven">
+                <label
+                  htmlFor="difficulty"
+                  className="text-orange-peel text-xs sm:text-sm font-maven"
+                >
                   Difficulty
                 </label>
                 <select
-                  value={contextFilters.difficulty}
+                  id="difficulty"
+                  value={contextFilters.difficulty || ""}
                   onChange={(e) => updateFilter("difficulty", e.target.value)}
                   className={`bg-persian-indigo text-gray-300 rounded-lg px-3 py-2 h-10
-                           border focus:outline-none focus:ring-2 
-                           focus:ring-princeton-orange w-full text-sm sm:text-base
+                           border focus:outline-none focus:ring-2 focus:ring-princeton-orange w-full text-sm sm:text-base
                            ${
                              contextFilters.difficulty
                                ? "border-orange-peel"
                                : "border-gray-600"
                            }`}
-                  aria-label="Filter by difficulty"
                   disabled={isLoading}
                 >
                   <option value="">All Difficulty</option>
@@ -263,24 +248,21 @@ const ProjectFilters = ({ projects, isLoading = false }) => {
               </div>
             </div>
 
-            {/* Search Bar */}
             <div className="relative mt-4">
               <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search projects..."
-                value={contextFilters.searchQuery}
+                value={contextFilters.searchQuery || ""}
                 onChange={(e) => updateFilter("searchQuery", e.target.value)}
                 className={`w-full bg-persian-indigo text-gray-300 rounded-lg pl-10 pr-4 py-2 h-10
-                         border focus:outline-none focus:ring-2 
-                         focus:ring-princeton-orange text-sm sm:text-base
+                         border focus:outline-none focus:ring-2 focus:ring-princeton-orange text-sm sm:text-base
                          ${
                            contextFilters.searchQuery
                              ? "border-orange-peel"
                              : "border-gray-600"
                          }`}
                 aria-label="Search projects"
-                role="searchbox"
                 disabled={isLoading}
               />
             </div>

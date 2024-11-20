@@ -14,7 +14,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
-import ProjectDetails from "./components/ProjectDetails";
+import ProjectDetails from "./components/projects/ProjectDetails";
 import Certifications from "./components/Certifications";
 import Resume from "./components/Resume";
 import Contact from "./components/Contact";

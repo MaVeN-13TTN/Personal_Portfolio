@@ -2,9 +2,8 @@ import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
 import { getProjects } from "../utils/api";
-import ProjectCard from "./ProjectCard";
-import ProjectFilters from "./ProjectFilters";
-// Update this import to use the hook from hooks directory
+import ProjectCard from "./projects/ProjectCard";
+import ProjectFilters from "./projects/ProjectFilters";
 import { useFilters } from "../hooks/useFilters";
 
 const containerVariants = {

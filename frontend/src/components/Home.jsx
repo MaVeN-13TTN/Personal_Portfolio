@@ -6,7 +6,7 @@ import * as FaIcons from "react-icons/fa";
 import * as SiIcons from "react-icons/si";
 import { getHero, getSkills, getProjects } from "../utils/api";
 import Card from "./Card";
-import ProjectCard from "./ProjectCard";
+import ProjectCard from "./projects/ProjectCard";
 
 const containerVariants = {
   hidden: { opacity: 0 },
