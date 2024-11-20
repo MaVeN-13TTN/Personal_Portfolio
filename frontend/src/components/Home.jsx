@@ -7,6 +7,7 @@ import * as SiIcons from "react-icons/si";
 import { getHero, getSkills, getProjects } from "../utils/api";
 import Card from "./Card";
 import ProjectCard from "./projects/ProjectCard";
+import { memo } from "react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -25,10 +26,10 @@ const itemVariants = {
   },
 };
 
-const DynamicIcon = ({ iconName, size = "1.5em", color = "#ff9e00" }) => {
+const DynamicIcon = memo(({ iconName, size = "1.5em", color = "#ff9e00" }) => {
   const IconComponent = FaIcons[iconName] || SiIcons[iconName];
   return IconComponent ? <IconComponent size={size} color={color} /> : null;
-};
+});
 
 DynamicIcon.propTypes = {
   iconName: PropTypes.string.isRequired,
@@ -36,13 +37,38 @@ DynamicIcon.propTypes = {
   color: PropTypes.string,
 };
 
+DynamicIcon.displayName = "DynamicIcon";
+
+const ErrorMessage = ({ message }) => (
+  <motion.div
+    className="text-pumpkin text-center"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+  >
+    {message}
+  </motion.div>
+);
+
+ErrorMessage.propTypes = {
+  message: PropTypes.string.isRequired,
+};
+
 const Home = () => {
-  const { data: heroData, isLoading: heroLoading } = useQuery({
+  const {
+    data: heroData,
+    isLoading: heroLoading,
+    error: heroError,
+  } = useQuery({
     queryKey: ["hero"],
     queryFn: getHero,
   });
 
-  const { data: skillsData, isLoading: skillsLoading } = useQuery({
+  const {
+    data: skillsData,
+    isLoading: skillsLoading,
+    error: skillsError,
+  } = useQuery({
     queryKey: ["skills"],
     queryFn: getSkills,
   });
@@ -62,17 +88,19 @@ const Home = () => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+      role="main"
     >
       {/* Hero Section */}
       <motion.section
         className="hero flex flex-col md:flex-row items-center justify-between py-16"
         variants={itemVariants}
+        aria-label="Introduction"
       >
         <div className="md:w-1/3 mb-8 md:mb-0">
           <Card />
         </div>
         <div className="md:w-2/3 md:pl-12 text-center md:text-left">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="sync">
             {heroLoading ? (
               <motion.div
                 key="loading"
@@ -80,11 +108,17 @@ const Home = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 className="space-y-4"
+                role="alert"
+                aria-busy="true"
               >
                 <div className="h-12 bg-persian-indigo rounded-lg animate-pulse" />
                 <div className="h-8 bg-persian-indigo rounded-lg animate-pulse w-3/4" />
                 <div className="h-6 bg-persian-indigo rounded-lg animate-pulse w-1/2" />
               </motion.div>
+            ) : heroError ? (
+              <ErrorMessage
+                message={`Error loading profile: ${heroError.message}`}
+              />
             ) : (
               <motion.div
                 key="content"
@@ -105,6 +139,7 @@ const Home = () => {
                   to="/projects"
                   className="bg-pumpkin hover:bg-safety-orange text-russian-violet font-maven 
                          font-bold py-3 px-6 rounded-md transition-smooth inline-block"
+                  aria-label="View portfolio projects"
                 >
                   View My Work
                 </Link>
@@ -115,19 +150,29 @@ const Home = () => {
       </motion.section>
 
       {/* Skills Section */}
-      <motion.section className="featured-skills" variants={itemVariants}>
+      <motion.section
+        className="featured-skills"
+        variants={itemVariants}
+        aria-label="Featured Skills"
+      >
         <h2 className="text-3xl font-titan text-princeton-orange mb-8 text-center">
           Featured Skills
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="sync">
             {skillsLoading ? (
               [...Array(6)].map((_, i) => (
                 <motion.div
                   key={`skeleton-${i}`}
                   className="bg-persian-indigo p-4 rounded-lg shadow-lg h-24 animate-pulse"
+                  role="alert"
+                  aria-busy="true"
                 />
               ))
+            ) : skillsError ? (
+              <ErrorMessage
+                message={`Error loading skills: ${skillsError.message}`}
+              />
             ) : skillsData?.technical ? (
               Object.entries(skillsData.technical)
                 .flatMap(([, skills]) => skills)
@@ -156,11 +201,15 @@ const Home = () => {
       </motion.section>
 
       {/* Projects Section */}
-      <motion.section className="highlighted-projects" variants={itemVariants}>
+      <motion.section
+        className="highlighted-projects"
+        variants={itemVariants}
+        aria-label="Highlighted Projects"
+      >
         <h2 className="text-3xl font-titan text-princeton-orange mb-8 text-center">
           Highlighted Projects
         </h2>
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="sync">
           {projectsLoading ? (
             <motion.div
               key="loading"
@@ -168,6 +217,8 @@ const Home = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              role="alert"
+              aria-busy="true"
             >
               {[...Array(2)].map((_, i) => (
                 <div
@@ -177,15 +228,9 @@ const Home = () => {
               ))}
             </motion.div>
           ) : projectsError ? (
-            <motion.div
-              key="error"
-              className="text-pumpkin text-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              Error loading projects: {projectsError.message}
-            </motion.div>
+            <ErrorMessage
+              message={`Error loading projects: ${projectsError.message}`}
+            />
           ) : (
             <motion.div
               key="content"
@@ -211,6 +256,7 @@ const Home = () => {
             className="bg-pumpkin hover:bg-safety-orange text-russian-violet 
                      font-maven font-bold py-3 px-6 rounded-md transition-smooth 
                      inline-block"
+            aria-label="View all portfolio projects"
           >
             View All Projects
           </Link>
