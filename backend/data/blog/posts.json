@@ -1,0 +1,65 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "slug": "getting-started-with-web-development",
+      "title": "Getting Started with Web Development",
+      "excerpt": "A comprehensive guide for beginners looking to start their journey in web development.",
+      "content": "# Getting Started with Web Development\n\nWeb development is an exciting field that combines creativity with technical skills. Whether you're looking to build a career or just want to create your own website, this guide will help you get started.\n\n## The Basics\n\n### HTML\nHTML is the foundation of web development. It's used to structure content on web pages:\n\n```html\n<!DOCTYPE html>\n<html>\n<head>\n    <title>My First Website</title>\n</head>\n<body>\n    <h1>Hello World!</h1>\n</body>\n</html>\n```\n\n### CSS\nCSS makes your websites beautiful:\n\n```css\nbody {\n    background-color: #f0f0f0;\n    font-family: Arial, sans-serif;\n}\n```\n\n### JavaScript\nJavaScript adds interactivity:\n\n```javascript\ndocument.querySelector('h1').addEventListener('click', () => {\n    alert('Hello Developer!');\n});\n```\n\n## Next Steps\n\n1. Learn version control with Git\n2. Pick a framework (React, Vue, or Angular)\n3. Practice building projects\n4. Join coding communities\n\nRemember, everyone starts somewhere. Keep learning and building!",
+      "author": "Ndung'u Kinyanjui",
+      "publishedDate": "2024-12-25T17:00:00.000Z",
+      "updatedDate": "2024-12-25T17:00:00.000Z",
+      "readingTime": 5,
+      "tags": ["Web Development", "Beginners", "Programming"],
+      "category": "Programming",
+      "status": "published",
+      "featuredImage": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&auto=format&fit=crop"
+    },
+    {
+      "id": "2",
+      "slug": "mastering-react-hooks",
+      "title": "Mastering React Hooks: A Deep Dive",
+      "excerpt": "Learn how to leverage React Hooks to write cleaner, more maintainable React components.",
+      "content": "# Mastering React Hooks\n\nReact Hooks have revolutionized how we write React components. Let's explore some common hooks and best practices.\n\n## useState\n\n```javascript\nconst [count, setCount] = useState(0);\n```\n\n## useEffect\n\n```javascript\nuseEffect(() => {\n  document.title = `Count: ${count}`;\n}, [count]);\n```\n\n## Custom Hooks\n\n```javascript\nfunction useWindowSize() {\n  const [size, setSize] = useState({ width: 0, height: 0 });\n  \n  useEffect(() => {\n    function updateSize() {\n      setSize({ width: window.innerWidth, height: window.innerHeight });\n    }\n    window.addEventListener('resize', updateSize);\n    updateSize();\n    return () => window.removeEventListener('resize', updateSize);\n  }, []);\n  \n  return size;\n}\n```\n\nHooks make React development more intuitive and fun!",
+      "author": "Ndung'u Kinyanjui",
+      "publishedDate": "2024-12-24T15:30:00.000Z",
+      "updatedDate": "2024-12-24T15:30:00.000Z",
+      "readingTime": 8,
+      "tags": ["React", "JavaScript", "Web Development"],
+      "category": "Programming",
+      "status": "published",
+      "featuredImage": "https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?w=800&auto=format&fit=crop"
+    },
+    {
+      "id": "3",
+      "slug": "modern-css-techniques",
+      "title": "Modern CSS Techniques for Better Web Design",
+      "excerpt": "Explore modern CSS features like Grid, Flexbox, and Custom Properties to create beautiful, responsive layouts.",
+      "content": "# Modern CSS Techniques\n\nCSS has evolved significantly. Let's look at some modern techniques that make web design easier and more powerful.\n\n## CSS Grid\n\n```css\n.grid-container {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\n  gap: 1rem;\n}\n```\n\n## CSS Custom Properties\n\n```css\n:root {\n  --primary-color: #3498db;\n  --secondary-color: #2ecc71;\n}\n\n.button {\n  background: var(--primary-color);\n}\n```\n\n## Modern Selectors\n\n```css\n.card:is(:hover, :focus) {\n  transform: translateY(-2px);\n}\n```\n\nModern CSS is amazing!",
+      "author": "Ndung'u Kinyanjui",
+      "publishedDate": "2024-12-23T14:00:00.000Z",
+      "updatedDate": "2024-12-23T14:00:00.000Z",
+      "readingTime": 6,
+      "tags": ["CSS", "Web Design", "Frontend"],
+      "category": "Design",
+      "status": "published",
+      "featuredImage": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&auto=format&fit=crop"
+    }
+  ],
+  "categories": [
+    "Programming",
+    "Design",
+    "Technology",
+    "Career"
+  ],
+  "tags": [
+    "Web Development",
+    "Programming",
+    "JavaScript",
+    "React",
+    "CSS",
+    "Web Design",
+    "Frontend",
+    "Beginners"
+  ]
+}
