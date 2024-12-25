@@ -13,5 +13,20 @@
         "Version Control",
         "Web Development"
       ]
+    },
+    {
+      "id": 1,
+      "name": "ALX Cloud Computing",
+      "issuer": "ALX AWS Program",
+      "date": "2024-12-11",
+      "imageUrl": "https://drive.google.com/file/d/18_VmkUytFdEe2-ojMztgjTKgJ_Cvh5FN/view",
+      "description": "Completed a 6-month ALX Cloud Computing program along with training in professional development skills for the digital age. Program powered by AWS Academy.",
+      "skills": [
+        "Cloud Computing",
+        "AWS",
+        "Professional Development",
+        "Digital Skills",
+        "Cloud Infrastructure"
+      ]
     }
   ]

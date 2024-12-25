@@ -4,23 +4,25 @@
       { "name": "Python", "icon": "FaPython" },
       { "name": "JavaScript", "icon": "FaJs" },
       { "name": "Java", "icon": "FaJava" },
-      { "name": "C++", "icon": "SiCplusplus" }
+      { "name": "C++", "icon": "SiCplusplus" },
+      { "name": "Dart", "icon": "SiDart" }
     ],
     "frontend": [
       { "name": "React", "icon": "FaReact" },
       { "name": "HTML5", "icon": "FaHtml5" },
       { "name": "CSS3", "icon": "FaCss3Alt" },
-      { "name": "Tailwind CSS", "icon": "SiTailwindcss" }
+      { "name": "Tailwind CSS", "icon": "SiTailwindcss" },
+      { "name": "Flutter", "icon": "SiFlutter" }
     ],
     "backend": [
       { "name": "Node.js", "icon": "FaNodeJs" },
       { "name": "Django", "icon": "SiDjango" },
       { "name": "Flask", "icon": "SiFlask" }
     ],
-  "scripting": [
+    "scripting": [
       { "name": "Bash", "icon": "FaTerminal" },
       { "name": "PowerShell", "icon": "FaWindows" }
-],
+    ],
     "cloud": [
       { "name": "AWS", "icon": "FaAws" }
     ],

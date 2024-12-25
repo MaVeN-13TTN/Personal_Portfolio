@@ -18,6 +18,7 @@ import ProjectDetails from "./components/projects/ProjectDetails";
 import Certifications from "./components/Certifications";
 import Resume from "./components/Resume";
 import Contact from "./components/Contact";
+import DynamicBackground from "./components/shared/DynamicBackground";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -112,13 +113,15 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <FilterProvider>
         <Router>
-          <div className="flex flex-col min-h-screen bg-russian-violet">
-            <Header />
-            <main className="flex-grow container mx-auto px-4 py-8">
-              <AnimatedRoutes />
-            </main>
-            <Footer />
-          </div>
+          <DynamicBackground>
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-grow container mx-auto px-4 py-8">
+                <AnimatedRoutes />
+              </main>
+              <Footer />
+            </div>
+          </DynamicBackground>
         </Router>
       </FilterProvider>
     </QueryClientProvider>
