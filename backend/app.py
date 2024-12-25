@@ -1,8 +1,10 @@
-from flask import Flask, jsonify, send_file
+from flask import Flask, jsonify, send_file, request
 from flask_cors import CORS
 import json
 import os
 from functools import wraps
+from datetime import datetime
+from difflib import SequenceMatcher
 
 app = Flask(__name__)
 CORS(app)
@@ -25,11 +27,162 @@ def error_handler(f):
 
 # Helper function to load JSON data
 def load_json(filename):
-    file_path = os.path.join("data", f"{filename}.json")
+    file_path = os.path.join(os.path.dirname(__file__), "data", f"{filename}.json")
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"File {filename}.json not found")
     with open(file_path, "r") as file:
         return json.load(file)
+
+
+def similar(a, b):
+    """Calculate similarity ratio between two strings."""
+    a = a.lower()
+    b = b.lower()
+    return SequenceMatcher(None, a, b).ratio()
+
+
+def highlight_text(text, search_terms, min_similarity=0.8):
+    """Add highlight markers around matching terms."""
+    if not text or not search_terms:
+        return text
+        
+    highlighted = text
+    matches = []
+    
+    # Convert text to lowercase for case-insensitive matching
+    text_lower = text.lower()
+    
+    # First, find exact matches
+    for term in search_terms:
+        term = term.lower().strip()
+        if not term:
+            continue
+            
+        start = 0
+        while True:
+            start = text_lower.find(term, start)
+            if start == -1:
+                break
+            matches.append((start, start + len(term), 'exact'))
+            start += len(term)
+    
+    # Then find fuzzy matches
+    words = text_lower.split()
+    for i, word in enumerate(words):
+        for term in search_terms:
+            term = term.lower().strip()
+            if not term:
+                continue
+                
+            # Skip if already exact match
+            if term in word:
+                continue
+                
+            # Check similarity
+            similarity = similar(term, word)
+            if similarity >= min_similarity:
+                # Find position in original text
+                pos = 0
+                for j in range(i):
+                    pos = text_lower.find(words[j], pos) + len(words[j])
+                pos = text_lower.find(word, pos)
+                matches.append((pos, pos + len(word), 'fuzzy'))
+    
+    # Sort matches by position, reversed to maintain string indices
+    matches.sort(key=lambda x: x[0], reverse=True)
+    
+    # Apply highlighting
+    for start, end, match_type in matches:
+        prefix = '<mark class="search-highlight-' + match_type + '">'
+        original = text[start:end]
+        highlighted = highlighted[:start] + prefix + original + '</mark>' + highlighted[end:]
+    
+    return highlighted
+
+def tokenize_text(text):
+    """Convert text to searchable tokens."""
+    if not text:
+        return []
+    # Convert to lowercase and split into words
+    words = text.lower().split()
+    # Remove common punctuation and convert to set to remove duplicates
+    words = [word.strip('.,!?()[]{}:;"\'-') for word in words]
+    # Remove empty strings and duplicates while preserving order
+    return list(dict.fromkeys(word for word in words if word))
+
+def calculate_relevance(post, search_terms):
+    """Calculate relevance score for a post."""
+    if not search_terms:
+        return 0, set(), []
+        
+    score = 0
+    matched_in = set()
+    match_details = []
+    
+    # Prepare searchable text
+    title_tokens = tokenize_text(post.get('title', ''))
+    excerpt_tokens = tokenize_text(post.get('excerpt', ''))
+    content_tokens = tokenize_text(post.get('content', ''))
+    tags = [tag.lower() for tag in post.get('tags', [])]
+    category = post.get('category', '').lower()
+    
+    for term in search_terms:
+        term = term.strip('.,!?()[]{}:;"\'-').lower()
+        if not term:
+            continue
+            
+        # Title exact match (highest priority)
+        if term in title_tokens:
+            score += 10
+            matched_in.add('title')
+            match_details.append(('title', 'exact', 10))
+        
+        # Tag exact match
+        if term in tags:
+            score += 8
+            matched_in.add('tags')
+            match_details.append(('tags', 'exact', 8))
+        
+        # Category exact match
+        if term == category:
+            score += 7
+            matched_in.add('category')
+            match_details.append(('category', 'exact', 7))
+        
+        # Excerpt exact match
+        if term in excerpt_tokens:
+            score += 5
+            matched_in.add('excerpt')
+            match_details.append(('excerpt', 'exact', 5))
+        
+        # Content exact match
+        if term in content_tokens:
+            score += 3
+            matched_in.add('content')
+            match_details.append(('content', 'exact', 3))
+        
+        # Fuzzy matching for title and tags only
+        if 'title' not in matched_in:
+            # Title fuzzy match
+            for token in title_tokens:
+                similarity = similar(term, token)
+                if similarity >= 0.8:
+                    score += similarity * 5
+                    matched_in.add('title_fuzzy')
+                    match_details.append(('title', 'fuzzy', round(similarity * 5, 2)))
+                    break
+        
+        if 'tags' not in matched_in:
+            # Tags fuzzy match
+            for tag in tags:
+                similarity = similar(term, tag)
+                if similarity >= 0.8:
+                    score += similarity * 4
+                    matched_in.add('tags_fuzzy')
+                    match_details.append(('tags', 'fuzzy', round(similarity * 4, 2)))
+                    break
+    
+    return score, matched_in, match_details
 
 
 @app.route("/api/hero")
@@ -164,10 +317,50 @@ def get_resume():
 @app.route("/api/resume/pdf")
 @error_handler
 def get_resume_pdf():
-    pdf_path = os.path.join("data", "resume.pdf")
+    pdf_path = os.path.join(os.path.dirname(__file__), "data", "resume.pdf")
     if not os.path.exists(pdf_path):
         return jsonify({"error": "Resume PDF not found"}), 404
     return send_file(pdf_path, as_attachment=True)
+
+
+# Blog routes
+@app.route("/api/blog/posts", methods=["GET"])
+@error_handler
+def get_blog_posts():
+    """Get all blog posts without filtering."""
+    blog_data = load_json("blog/posts")
+    posts = blog_data["posts"]
+    
+    # Sort by published date (newest first)
+    posts.sort(key=lambda x: x["publishedDate"], reverse=True)
+    
+    return jsonify({
+        "posts": posts,
+        "total": len(posts)
+    })
+
+@app.route("/api/blog/posts/<slug>", methods=["GET"])
+@error_handler
+def get_blog_post(slug):
+    blog_data = load_json("blog/posts")
+    post = next((post for post in blog_data["posts"] if post["slug"] == slug), None)
+    
+    if not post:
+        return jsonify({"error": "Post not found"}), 404
+        
+    return jsonify(post)
+
+@app.route("/api/blog/categories", methods=["GET"])
+@error_handler
+def get_blog_categories():
+    blog_data = load_json("blog/posts")
+    return jsonify(blog_data["categories"])
+
+@app.route("/api/blog/tags", methods=["GET"])
+@error_handler
+def get_blog_tags():
+    blog_data = load_json("blog/posts")
+    return jsonify(blog_data["tags"])
 
 
 # Error handlers for common HTTP errors
