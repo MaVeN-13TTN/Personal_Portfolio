@@ -19,6 +19,8 @@ import Certifications from "./components/Certifications";
 import Resume from "./components/Resume";
 import Contact from "./components/Contact";
 import DynamicBackground from "./components/shared/DynamicBackground";
+import BlogList from "./components/blog/BlogList";
+import BlogPost from "./components/blog/BlogPost";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -94,6 +96,8 @@ const AnimatedRoutes = () => {
           />
           <Route path="/resume" element={<Resume />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/blog" element={<BlogList />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route
             path="*"
             element={

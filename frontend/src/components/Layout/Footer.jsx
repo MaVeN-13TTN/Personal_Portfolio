@@ -10,6 +10,7 @@ const QUICK_LINKS = Object.freeze([
   "About",
   "Skills",
   "Projects",
+  "Blog",
   "Certifications",
   "Contact",
 ]);
@@ -82,29 +83,35 @@ const QuickLinksDropdown = memo(function QuickLinksDropdown({
         Quick Links
       </button>
       {isOpen && (
-        <ul
-          ref={dropdownRef}
-          id="quick-links-dropdown"
-          className="absolute bg-[rgba(0,0,0,0.8)] backdrop-blur-sm text-white rounded-lg shadow-lg mt-2 w-full z-10"
-          role="menu"
-        >
-          {links.map((item) => (
-            <li
-              key={item}
-              className="border-b border-gray-600 last:border-none"
-              role="none"
-            >
-              <Link
-                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                onClick={() => onToggle(false)}
-                className="block px-4 py-2 hover:bg-princeton-orange hover:text-russian-violet transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-peel"
-                role="menuitem"
+        <div className="absolute bottom-full transform translate-y-[-0.5rem] left-0 w-full z-50">
+          <ul
+            ref={dropdownRef}
+            id="quick-links-dropdown"
+            className="bg-[rgba(0,0,0,0.8)] backdrop-blur-sm text-white rounded-lg shadow-lg w-full max-h-[60vh] overflow-y-auto custom-scrollbar"
+            style={{
+              '--scrollbar-thumb': '#ff9e00',
+              '--scrollbar-track': '#240046'
+            }}
+            role="menu"
+          >
+            {links.map((item) => (
+              <li
+                key={item}
+                className="border-b border-gray-600 last:border-none"
+                role="none"
               >
-                {item}
-              </Link>
-            </li>
-          ))}
-        </ul>
+                <Link
+                  to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                  onClick={() => onToggle(false)}
+                  className="block px-4 py-2 hover:bg-princeton-orange hover:text-russian-violet transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-peel"
+                  role="menuitem"
+                >
+                  {item}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

@@ -1,20 +1,109 @@
 @import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700&family=Titan+One&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Import Tailwind styles from separate file */
+@import './tailwind.css';
 
-@layer base {
-  body {
-    @apply font-maven text-orange-peel bg-russian-violet;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-titan;
-  }
+/* Base Styles */
+:root {
+  --color-orange-peel: #ff9e00;
+  --color-pumpkin: #ff6d00;
+  --color-russian-violet: #240046;
+  --color-persian-indigo: #3c096c;
 }
 
-@layer utilities {
-  .transition-smooth {
-    @apply transition-all duration-300 ease-in-out;
-  }
+body {
+  font-family: 'Maven Pro', sans-serif;
+  color: var(--color-orange-peel);
+  background-color: var(--color-russian-violet);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Titan One', cursive;
+}
+
+/* Custom Component Styles */
+.text-gradient {
+  background: linear-gradient(to right, var(--color-orange-peel), var(--color-pumpkin));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.nav-link {
+  color: var(--color-orange-peel);
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: var(--color-pumpkin);
+}
+
+/* Animation Utilities */
+.animation-delay-2000 {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation-delay: 4s;
+}
+
+/* Background Utilities */
+.custom-bg-gradient {
+  background: linear-gradient(to right, var(--color-russian-violet), var(--color-persian-indigo));
+}
+
+/* Transition Utilities */
+.transition-smooth {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Search Highlight Styles */
+mark.exact {
+  background-color: rgba(255, 158, 0, 0.2);
+  color: var(--color-orange-peel);
+  padding: 0 0.25rem;
+  border-radius: 0.25rem;
+}
+
+mark.fuzzy {
+  background-color: rgba(255, 158, 0, 0.1);
+  color: var(--color-orange-peel);
+  padding: 0 0.25rem;
+  border-radius: 0.25rem;
+}
+
+mark {
+  transition: background-color 0.2s;
+}
+
+mark:hover {
+  background-color: rgba(255, 158, 0, 0.3);
+}
+
+/* Custom Scrollbar Styles */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--scrollbar-track, var(--color-russian-violet));
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb, var(--color-orange-peel));
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb, var(--color-pumpkin));
+  opacity: 0.8;
+}
+
+/* Firefox Scrollbar */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb, var(--color-orange-peel)) var(--scrollbar-track, var(--color-russian-violet));
 }

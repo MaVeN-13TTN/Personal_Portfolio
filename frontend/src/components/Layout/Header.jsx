@@ -7,6 +7,7 @@ const NAVIGATION_LINKS = [
   "About",
   "Skills",
   "Projects",
+  "Blog",
   "Certifications",
   "Resume",
   "Contact",
