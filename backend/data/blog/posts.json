@@ -10,10 +10,19 @@
       "publishedDate": "2024-12-25T17:00:00.000Z",
       "updatedDate": "2024-12-25T17:00:00.000Z",
       "readingTime": 5,
-      "tags": ["Web Development", "Beginners", "Programming"],
+      "tags": [
+        "Web Development",
+        "Beginners",
+        "Programming"
+      ],
       "category": "Programming",
       "status": "published",
-      "featuredImage": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&auto=format&fit=crop"
+      "featuredImage": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&auto=format&fit=crop",
+      "engagement": {
+        "likes": 0,
+        "claps": 0,
+        "hearts": 0
+      }
     },
     {
       "id": "2",
@@ -25,10 +34,19 @@
       "publishedDate": "2024-12-24T15:30:00.000Z",
       "updatedDate": "2024-12-24T15:30:00.000Z",
       "readingTime": 8,
-      "tags": ["React", "JavaScript", "Web Development"],
+      "tags": [
+        "React",
+        "JavaScript",
+        "Web Development"
+      ],
       "category": "Programming",
       "status": "published",
-      "featuredImage": "https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?w=800&auto=format&fit=crop"
+      "featuredImage": "https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?w=800&auto=format&fit=crop",
+      "engagement": {
+        "likes": 0,
+        "claps": 0,
+        "hearts": 0
+      }
     },
     {
       "id": "3",
@@ -40,10 +58,19 @@
       "publishedDate": "2024-12-23T14:00:00.000Z",
       "updatedDate": "2024-12-23T14:00:00.000Z",
       "readingTime": 6,
-      "tags": ["CSS", "Web Design", "Frontend"],
+      "tags": [
+        "CSS",
+        "Web Design",
+        "Frontend"
+      ],
       "category": "Design",
       "status": "published",
-      "featuredImage": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&auto=format&fit=crop"
+      "featuredImage": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&auto=format&fit=crop",
+      "engagement": {
+        "likes": 0,
+        "claps": 0,
+        "hearts": 0
+      }
     }
   ],
   "categories": [

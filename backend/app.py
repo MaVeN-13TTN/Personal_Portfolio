@@ -34,6 +34,13 @@ def load_json(filename):
         return json.load(file)
 
 
+# Helper function to save JSON data
+def save_json(filename, data):
+    file_path = os.path.join(os.path.dirname(__file__), "data", f"{filename}.json")
+    with open(file_path, "w") as file:
+        json.dump(data, file, indent=2)
+
+
 def similar(a, b):
     """Calculate similarity ratio between two strings."""
     a = a.lower()
@@ -362,6 +369,55 @@ def get_blog_tags():
     blog_data = load_json("blog/posts")
     return jsonify(blog_data["tags"])
 
+@app.route("/api/blog/posts/<slug>/engage", methods=["POST"])
+@error_handler
+def engage_with_post(slug):
+    """Handle post engagement (likes, claps, hearts)"""
+    data = request.get_json()
+    if not data or 'type' not in data or 'action' not in data:
+        return jsonify({"error": "Missing engagement type or action"}), 400
+
+    engagement_type = data['type']
+    action = data['action']  # 'add' or 'remove'
+    
+    if engagement_type not in ['liked', 'clapped', 'hearted']:
+        return jsonify({"error": "Invalid engagement type"}), 400
+    
+    if action not in ['add', 'remove']:
+        return jsonify({"error": "Invalid action"}), 400
+
+    # Load blog posts
+    blog_data = load_json("blog/posts")
+    post = next((post for post in blog_data["posts"] if post["slug"] == slug), None)
+    
+    if not post:
+        return jsonify({"error": "Post not found"}), 404
+
+    # Initialize engagement if it doesn't exist
+    if "engagement" not in post:
+        post["engagement"] = {"likes": 0, "claps": 0, "hearts": 0}
+
+    # Map engagement types to their count keys
+    type_to_key = {
+        'liked': 'likes',
+        'clapped': 'claps',
+        'hearted': 'hearts'
+    }
+
+    # Update the appropriate counter
+    count_key = type_to_key[engagement_type]
+    if action == 'add':
+        post["engagement"][count_key] += 1
+    else:  # remove
+        post["engagement"][count_key] = max(0, post["engagement"][count_key] - 1)
+
+    # Save the updated data
+    save_json("blog/posts", blog_data)
+
+    return jsonify({
+        "success": True,
+        "counts": post["engagement"]
+    })
 
 # Error handlers for common HTTP errors
 @app.errorhandler(404)

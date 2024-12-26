@@ -10,30 +10,24 @@ import {
   Clock,
   Tag,
   Share2,
-  Twitter,
-  Facebook,
-  Linkedin,
   ArrowLeft
 } from 'lucide-react';
-import {
-  TwitterShareButton,
-  FacebookShareButton,
-  LinkedinShareButton,
-} from 'react-share';
+import ShareModal from '../common/ShareModal';
+import EngagementIcons from './EngagementIcons';
 
 const BlogPost = () => {
   const { slug } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const shareUrl = window.location.href;
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
         setLoading(true);
         const response = await fetch(`/api/blog/posts/${slug}`);
-        if (!response.ok) throw new Error('Failed to fetch post');
+        if (!response.ok) throw new Error('Post not found');
         const data = await response.json();
         setPost(data);
       } catch (err) {
@@ -46,62 +40,50 @@ const BlogPost = () => {
     fetchPost();
   }, [slug]);
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="text-xl text-orange-peel">Loading post...</div>
-      </div>
-    );
-  }
+  if (loading) return <div className="text-center py-8">Loading...</div>;
+  if (error) return <div className="text-center py-8 text-red-500">{error}</div>;
+  if (!post) return null;
 
-  if (error) {
-    return (
-      <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="text-xl text-red-500">Error: {error}</div>
-      </div>
-    );
-  }
-
-  if (!post) {
-    return (
-      <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="text-xl text-orange-peel">Post not found</div>
-      </div>
-    );
-  }
+  const currentUrl = window.location.href;
 
   return (
-    <article className="container mx-auto px-4 py-8 max-w-4xl">
+    <article className="max-w-4xl mx-auto px-4 py-8">
       <Link
         to="/blog"
-        className="inline-flex items-center text-orange-peel hover:text-princeton-orange mb-8 transition-colors"
+        className="inline-flex items-center gap-2 text-orange-peel hover:text-orange-peel/80 mb-6 transition-colors"
       >
-        <ArrowLeft className="mr-2" />
+        <ArrowLeft size={20} />
         Back to Blog
       </Link>
 
       {post.featuredImage && (
-        <div className="aspect-video w-full overflow-hidden rounded-xl mb-8">
-          <img
-            src={post.featuredImage}
-            alt={post.title}
-            className="w-full h-full object-cover"
-          />
-        </div>
+        <img
+          src={post.featuredImage}
+          alt={post.title}
+          className="w-full h-[400px] object-cover rounded-lg mb-8"
+        />
       )}
 
-      <h1 className="text-4xl md:text-5xl font-titan text-orange-peel mb-6">
-        {post.title}
-      </h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-4xl font-titan text-orange-peel">{post.title}</h1>
+        <button
+          onClick={() => setIsShareModalOpen(true)}
+          className="text-orange-peel hover:text-orange-peel/80 transition-colors flex items-center gap-2"
+          aria-label="Share post"
+        >
+          <Share2 size={20} />
+          <span>Share this post</span>
+        </button>
+      </div>
 
-      <div className="flex flex-wrap items-center gap-4 text-sm text-gray-300 mb-8">
-        <div className="flex items-center gap-1">
+      <div className="flex flex-wrap gap-4 text-sm text-gray-400 mb-8">
+        <div className="flex items-center gap-2">
           <Calendar size={16} />
           <time dateTime={post.publishedDate}>
             {format(new Date(post.publishedDate), 'MMMM d, yyyy')}
           </time>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
           <Clock size={16} />
           <span>{post.readingTime} min read</span>
         </div>
@@ -109,11 +91,11 @@ const BlogPost = () => {
 
       {post.tags && post.tags.length > 0 && (
         <div className="flex flex-wrap gap-2 mb-8">
-          {post.tags.map(tag => (
+          {post.tags.map((tag) => (
             <Link
               key={tag}
-              to={`/blog/tag/${tag}`}
-              className="flex items-center gap-1 text-sm bg-russian-violet px-3 py-1 rounded-full hover:bg-tekhelet transition-colors"
+              to={`/blog?tag=${tag}`}
+              className="flex items-center gap-1 text-sm px-3 py-1 rounded-full bg-russian-violet text-gray-300 hover:bg-tekhelet transition-colors"
             >
               <Tag size={14} />
               {tag}
@@ -122,7 +104,7 @@ const BlogPost = () => {
         </div>
       )}
 
-      <div className="prose prose-invert prose-orange max-w-none mb-8">
+      <div className="prose prose-invert prose-orange max-w-none">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
@@ -149,23 +131,23 @@ const BlogPost = () => {
         </ReactMarkdown>
       </div>
 
-      <div className="flex items-center gap-4 border-t border-persian-indigo pt-8">
-        <span className="text-gray-300 flex items-center gap-2">
-          <Share2 size={20} />
-          Share this post:
-        </span>
-        <div className="flex gap-2">
-          <TwitterShareButton url={shareUrl} title={post.title}>
-            <Twitter className="w-8 h-8 p-1.5 text-gray-300 hover:text-orange-peel transition-colors" />
-          </TwitterShareButton>
-          <FacebookShareButton url={shareUrl} quote={post.title}>
-            <Facebook className="w-8 h-8 p-1.5 text-gray-300 hover:text-orange-peel transition-colors" />
-          </FacebookShareButton>
-          <LinkedinShareButton url={shareUrl} title={post.title}>
-            <Linkedin className="w-8 h-8 p-1.5 text-gray-300 hover:text-orange-peel transition-colors" />
-          </LinkedinShareButton>
-        </div>
+      <div className="mt-8 border-t border-russian-violet pt-6">
+        <EngagementIcons 
+          postId={post.slug} 
+          initialCounts={{
+            likes: post.engagement?.likes || 0,
+            claps: post.engagement?.claps || 0,
+            hearts: post.engagement?.hearts || 0
+          }}
+        />
       </div>
+
+      <ShareModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        url={currentUrl}
+        title={post.title}
+      />
     </article>
   );
 };

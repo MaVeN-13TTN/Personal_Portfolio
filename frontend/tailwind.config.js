@@ -19,6 +19,21 @@ export default {
         titan: ["Titan One", "cursive"],
         maven: ["Maven Pro", "sans-serif"],
       },
+      keyframes: {
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'engagement': {
+          '0%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.2)' },
+          '100%': { transform: 'scale(1)' },
+        }
+      },
+      animation: {
+        'fade-in': 'fade-in 0.2s ease-in-out',
+        'engagement': 'engagement 0.5s ease-in-out',
+      },
     },
   },
   plugins: [],
