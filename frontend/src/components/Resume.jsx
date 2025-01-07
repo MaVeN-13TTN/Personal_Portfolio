@@ -4,10 +4,9 @@ import { getResume } from "../utils/api";
 import {
   FaEnvelope,
   FaPhone,
-  FaMapMarkerAlt,
-  FaDownload,
   FaLinkedin,
-  FaGithub,
+  FaGlobe,
+  FaDownload,
 } from "react-icons/fa";
 
 const containerVariants = {
@@ -53,34 +52,27 @@ const Resume = () => {
   return (
     <div className="bg-gray-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <motion.div
-        className="max-w-4xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden font-maven"
+        className="max-w-5xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden font-maven"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         <header className="bg-gray-800 text-white py-8 px-6">
           <h1 className="text-3xl sm:text-4xl font-maven font-light mb-2">
-            Samuel Ndung'u Kinyanjui
+            {resumeData.name}
           </h1>
-          <p className="text-xl text-gray-300 mb-4 font-maven font-light">
-            Computer Science Student
-          </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-300 font-maven">
             <span className="flex items-center">
-              <FaEnvelope className="mr-2" /> kinyanjuindungu1324@gmail.com
+              <FaEnvelope className="mr-2" /> {resumeData.contact.email}
             </span>
             <span className="flex items-center">
-              <FaPhone className="mr-2" /> +254 728 446 824
+              <FaPhone className="mr-2" /> {resumeData.contact.phone}
             </span>
             <span className="flex items-center">
-              <FaMapMarkerAlt className="mr-2" /> Nairobi, Kenya
+              <FaLinkedin className="mr-2" /> {resumeData.contact.linkedin}
             </span>
             <span className="flex items-center">
-              <FaLinkedin className="mr-2" />
-              {"Ndung'u Kinyanjui"}
-            </span>
-            <span className="flex items-center">
-              <FaGithub className="mr-2" /> {"https://github.com/MaVeN-13TTN"}
+              <FaGlobe className="mr-2" /> {resumeData.contact.portfolio}
             </span>
           </div>
         </header>
@@ -97,6 +89,19 @@ const Resume = () => {
 
           <motion.section className="mb-8" variants={sectionVariants}>
             <h2 className="text-2xl font-maven font-light text-gray-800 mb-3 pb-2 border-b border-gray-300">
+              Certifications
+            </h2>
+            <ul className="list-disc list-inside text-gray-700 font-maven">
+              {resumeData.certifications.map((cert, index) => (
+                <li key={index} className="mb-2">
+                  {cert}
+                </li>
+              ))}
+            </ul>
+          </motion.section>
+
+          <motion.section className="mb-8" variants={sectionVariants}>
+            <h2 className="text-2xl font-maven font-light text-gray-800 mb-3 pb-2 border-b border-gray-300">
               Experience
             </h2>
             {resumeData.experience.map((exp, index) => (
@@ -106,11 +111,12 @@ const Resume = () => {
                 </h3>
                 <p className="text-gray-600 italic mb-2 font-maven">
                   {exp.company} | {exp.duration}
+                  {exp.location && ` | ${exp.location}`}
                 </p>
                 <ul className="list-disc list-inside text-gray-700 font-maven">
-                  {exp.responsibilities.map((resp, idx) => (
+                  {exp.achievements.map((achievement, idx) => (
                     <li key={idx} className="mb-1 pl-5 -indent-5">
-                      {resp}
+                      {achievement}
                     </li>
                   ))}
                 </ul>
@@ -122,13 +128,61 @@ const Resume = () => {
             <h2 className="text-2xl font-maven font-light text-gray-800 mb-3 pb-2 border-b border-gray-300">
               Education
             </h2>
-            {resumeData.education.map((edu, index) => (
+            <div className="mb-4">
+              <h3 className="text-lg font-maven font-semibold text-gray-700">
+                {resumeData.education.degree}
+              </h3>
+              <p className="text-gray-600 font-maven">
+                {resumeData.education.institution}, {resumeData.education.graduation}
+              </p>
+            </div>
+          </motion.section>
+
+          <motion.section className="mb-8" variants={sectionVariants}>
+            <h2 className="text-2xl font-maven font-light text-gray-800 mb-3 pb-2 border-b border-gray-300">
+              Skills
+            </h2>
+            {Object.entries(resumeData.skills).map(([category, skills]) => (
+              <div key={category} className="mb-4">
+                <h3 className="text-lg font-maven font-semibold text-gray-700 mb-2">
+                  {category}
+                </h3>
+                <ul className="list-disc list-inside text-gray-700 font-maven">
+                  {skills.map((skill, idx) => (
+                    <li key={idx} className="mb-1">
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </motion.section>
+
+          <motion.section className="mb-8" variants={sectionVariants}>
+            <h2 className="text-2xl font-maven font-light text-gray-800 mb-3 pb-2 border-b border-gray-300">
+              Projects
+            </h2>
+            {resumeData.projects.map((project, index) => (
               <div key={index} className="mb-4">
                 <h3 className="text-lg font-maven font-semibold text-gray-700">
-                  {edu.degree}
+                  {project.name}
                 </h3>
-                <p className="text-gray-600 font-maven">
-                  {edu.institution}, {edu.year}
+                <p className="text-gray-700 font-maven">{project.description}</p>
+              </div>
+            ))}
+          </motion.section>
+
+          <motion.section className="mb-8" variants={sectionVariants}>
+            <h2 className="text-2xl font-maven font-light text-gray-800 mb-3 pb-2 border-b border-gray-300">
+              Leadership Principles
+            </h2>
+            {resumeData.leadershipPrinciples.map((principle, index) => (
+              <div key={index} className="mb-4">
+                <h3 className="text-lg font-maven font-semibold text-gray-700">
+                  {principle.principle}
+                </h3>
+                <p className="text-gray-700 font-maven">
+                  {principle.demonstration}
                 </p>
               </div>
             ))}
@@ -136,12 +190,12 @@ const Resume = () => {
 
           <motion.section variants={sectionVariants}>
             <h2 className="text-2xl font-maven font-light text-gray-800 mb-3 pb-2 border-b border-gray-300">
-              Skills
+              Interests
             </h2>
             <ul className="list-disc list-inside text-gray-700 columns-1 sm:columns-2 gap-x-6 font-maven">
-              {resumeData.skills.map((skill, index) => (
+              {resumeData.interests.map((interest, index) => (
                 <li key={index} className="mb-1">
-                  {skill}
+                  {interest}
                 </li>
               ))}
             </ul>

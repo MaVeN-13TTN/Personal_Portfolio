@@ -1,49 +1,104 @@
 {
-  "name": "Samuel Ndung'u Kinyanjui",
-  "title": "Full-Stack Developer & Cybersecurity Enthusiast",
+  "name": "Ndung'u Kinyanjui",
   "contact": {
     "email": "kinyanjuindungu1324@gmail.com",
     "phone": "+254 728 446 824",
-    "location": "Nairobi, Kenya",
     "linkedin": "linkedin.com/in/ndungu-kinyanjui-581976281",
-    "github": "github.com/MaVeN-13TTN"
+    "portfolio": "portfolio-website-url"
   },
-  "summary": "As an aspiring security analyst and full-stack developer, I bring a deep passion for protecting organizations and individuals from cyber threats while creating innovative web solutions. My expertise spans incident response, risk management, and security monitoring, combined with strong full-stack development skills. I am adept at performing vulnerability assessments, identifying potential risks, and providing mitigation strategies to safeguard systems and data.",
+  "summary": "AWS Certified Solutions Architect with a strong foundation in cloud computing, cybersecurity, and DevOps. Proven ability to drive impactful solutions at scale by delivering secure, cost-effective, and customer-focused AWS architectures. Seeking an opportunity at Amazon to innovate and contribute to building world-class cloud infrastructure.",
+  "skills": {
+    "Cloud Technologies": ["AWS (EC2, S3, RDS, VPC, IAM, Lambda, CloudFormation, Route 53, CloudWatch)"],
+    "DevOps Tools": ["Docker", "Kubernetes", "Terraform", "GitHub Actions", "Jenkins"],
+    "Programming Languages": ["Python", "JavaScript", "Java", "Bash"],
+    "Security": ["Identity and Access Management", "Network Security", "Encryption Standards", "AWS Shared Responsibility Model"],
+    "Networking": ["VPC Design", "NAT Gateways", "Load Balancers", "Subnetting", "VPNs"],
+    "Cost Optimization": ["AWS Pricing Models", "Reserved Instances", "Savings Plans"],
+    "Project Management": ["Agile", "Scrum", "Team Collaboration"]
+  },
+  "certifications": [
+    "AWS Certified Solutions Architect – Associate",
+    "AWS Certified Cloud Practitioner"
+  ],
   "experience": [
+    {
+      "title": "Cloud Engineering Intern",
+      "company": "SolaviseTech",
+      "location": "Remote",
+      "duration": "January 2025 – Present",
+      "achievements": [
+        "Reduced cloud spend by 15% by implementing cost-saving measures through optimized resource allocation",
+        "Delivered high-availability solutions using Infrastructure as Code (IaC) with Terraform, minimizing manual intervention and increasing deployment speed by 40%",
+        "Enhanced cloud security by conducting in-depth audits and aligning environments with industry compliance standards"
+      ]
+    },
+    {
+      "title": "GDG Cybersecurity Lead",
+      "company": "Daystar University",
+      "duration": "October 2024 – Present",
+      "achievements": [
+        "Organized workshops and hackathons impacting over 200 students, focusing on Google technologies and cybersecurity best practices",
+        "Fostered awareness and adoption of Google Cloud tools for secure application development, leading to the successful completion of 10+ projects",
+        "Enhanced cybersecurity knowledge among participants, increasing engagement in technology-focused initiatives by 50%",
+        "Championed a cybersecurity culture, increasing student participation in cloud initiatives by 50%"
+      ]
+    },
     {
       "title": "Student Developer",
       "company": "DITA",
-      "duration": "2022 - Present",
-      "responsibilities": [
-        "Collaborate on full-stack development projects, enhancing both frontend and backend skills",
-        "Implement security best practices in web application development",
+      "duration": "2022 – Present",
+      "achievements": [
+        "Designed and developed scalable software solutions, integrating robust frontend and backend components",
+        "Built and maintained RESTful APIs, enabling seamless communication between client and server-side applications",
+        "Conducted unit testing and debugging, ensuring software reliability and reducing defects by 30%",
+        "Collaborated with cross-functional teams to deliver high-quality software projects on time and within scope",
         "Participate in code reviews and contribute to improving overall code quality"
       ]
     }
   ],
-  "education": [
+  "education": {
+    "degree": "Bachelor of Applied Science in Computer Science",
+    "institution": "Daystar University",
+    "graduation": "Expected 2026"
+  },
+  "projects": [
     {
-      "degree": "Bachelor of Science in Applied Computer Science",
-      "institution": "Daystar University",
-      "year": "2022 - 2026"
+      "name": "Scalable Web Application on AWS",
+      "description": "Architected a web application supporting 1,000+ concurrent users, integrating EC2 instances, RDS, and an ALB to ensure high performance and availability"
+    },
+    {
+      "name": "Cost-Efficient Storage Solution",
+      "description": "Reduced storage costs by 20% by implementing S3 lifecycle policies and optimizing data access patterns"
+    },
+    {
+      "name": "Automated Disaster Recovery",
+      "description": "Designed and implemented a recovery system using CloudFormation and S3 versioning, reducing downtime during outages by 80%"
     }
   ],
-  "skills": [
-    "Full-Stack Development: React, Vue.js, Node.js, Express.js",
-    "Programming Languages: JavaScript, Python, Java, C++",
-    "Cloud Computing: AWS, Google Cloud Platform, Azure",
-    "Cybersecurity: Network Security, Application Security, Risk Management",
-    "Database Management: MongoDB, PostgreSQL, MySQL",
-    "DevOps: Docker, Kubernetes, Git, GitHub Actions",
-    "Web Technologies: HTML5, CSS3, RESTful APIs",
-    "Problem-solving and analytical thinking",
-    "Strong written and verbal communication"
+  "achievements": [
+    "Increased application uptime by 99.9% through robust architectural designs",
+    "Delivered cloud security workshops to 200+ students, fostering adoption of secure practices",
+    "Reduced deployment times by 50% by introducing CI/CD pipelines across multiple projects",
+    "Enhanced infrastructure scalability, handling traffic spikes of up to 200% without performance degradation"
+  ],
+  "leadershipPrinciples": [
+    {
+      "principle": "Customer Obsession",
+      "demonstration": "Delivered scalable solutions tailored to client requirements, improving customer satisfaction scores by 25%"
+    },
+    {
+      "principle": "Dive Deep",
+      "demonstration": "Identified and resolved complex architectural challenges, leading to a 15% reduction in operational costs"
+    },
+    {
+      "principle": "Deliver Results",
+      "demonstration": "Consistently achieved project milestones, delivering high-quality AWS solutions within budget and deadlines"
+    }
   ],
   "interests": [
-    "Cloud Computing and Infrastructure",
-    "Cybersecurity and Ethical Hacking",
-    "Artificial Intelligence and Machine Learning",
-    "Blockchain Technology"
+    "AI-powered cloud security solutions",
+    "Open-source contributions to DevOps tools",
+    "Building resilient cloud-native architectures"
   ],
   "pdfUrl": "/api/resume/pdf"
 }
